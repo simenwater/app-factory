@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { Timeline, User } from '@/types';
+import type { Timeline, User, TimelineEvent } from '@/types';
 
 interface AppState {
   user: User;
@@ -31,6 +31,11 @@ interface AppState {
    * 升级订阅
    */
   upgradeToPro: () => void;
+  
+  /**
+   * 更新事件
+   */
+  updateEvent: (eventId: string, updates: Partial<Omit<TimelineEvent, 'id'>>) => void;
 }
 
 export const useStore = create<AppState>()(
@@ -71,6 +76,26 @@ export const useStore = create<AppState>()(
           generationsLimit: 999999,
         },
       })),
+      
+      updateEvent: (eventId, updates) => set((state) => {
+        if (!state.currentTimeline) return state;
+        
+        const updatedEvents = state.currentTimeline.events.map(event =>
+          event.id === eventId ? { ...event, ...updates } : event
+        );
+        
+        const updatedTimeline = {
+          ...state.currentTimeline,
+          events: updatedEvents,
+        };
+        
+        return {
+          currentTimeline: updatedTimeline,
+          timelines: state.timelines.map(t =>
+            t.id === updatedTimeline.id ? updatedTimeline : t
+          ),
+        };
+      }),
     }),
     {
       name: 'timeflow-storage',
