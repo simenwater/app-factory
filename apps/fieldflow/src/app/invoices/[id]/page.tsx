@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 import { useStore } from "@/store/useStore";
 import { StatusBadge } from "@/components/StatusBadge";
 import { formatCurrency, formatDate } from "@/lib/utils";
-import { downloadInvoicePDF } from "@/lib/pdf";
+import { downloadInvoicePDF, shareInvoicePDF } from "@/lib/pdf";
 import type { InvoiceStatus, PaymentStatus } from "@/types";
 
 /**
@@ -44,6 +44,13 @@ export default function InvoiceDetailPage({
 
   const handleDownloadPDF = () => {
     downloadInvoicePDF(invoice, settings);
+  };
+
+  const handleSharePDF = async () => {
+    const shared = await shareInvoicePDF(invoice, settings);
+    if (shared && invoice.invoiceStatus === "draft") {
+      updateInvoice(id, { invoiceStatus: "sent" as InvoiceStatus });
+    }
   };
 
   const handleSend = () => {
@@ -181,13 +188,20 @@ export default function InvoiceDetailPage({
 
       {/* Actions */}
       <div className="space-y-3 pt-2">
+        <button
+          onClick={handleSharePDF}
+          className="flex w-full items-center justify-center gap-2 rounded-xl bg-green-500 py-3.5 text-base font-semibold text-white shadow-sm transition-colors hover:bg-green-600"
+        >
+          <Send size={18} />
+          发送给客户
+        </button>
         <div className="flex gap-3">
           <button
             onClick={handleDownloadPDF}
             className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-primary py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-primary-dark"
           >
             <Download size={16} />
-            Download PDF
+            下载 PDF
           </button>
           {invoice.invoiceStatus === "draft" && (
             <button
@@ -195,7 +209,7 @@ export default function InvoiceDetailPage({
               className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-blue-500 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-blue-600"
             >
               <Send size={16} />
-              Mark as Sent
+              标记已发送
             </button>
           )}
         </div>
@@ -203,10 +217,10 @@ export default function InvoiceDetailPage({
           {invoice.paymentStatus !== "paid" && (
             <button
               onClick={handleMarkPaid}
-              className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-green-500 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-green-600"
+              className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-green-600 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-green-700"
             >
               <CheckCircle2 size={16} />
-              Mark as Paid
+              标记已收款
             </button>
           )}
           <button

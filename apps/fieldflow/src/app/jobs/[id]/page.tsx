@@ -176,7 +176,7 @@ export default function JobDetailPage({
             className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-primary py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-primary-dark"
           >
             <FileText size={16} />
-            Create Invoice
+            生成发票
           </Link>
           <button
             onClick={handleDelete}

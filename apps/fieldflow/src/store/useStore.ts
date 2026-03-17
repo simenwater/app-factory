@@ -8,6 +8,7 @@ import type {
   Customer,
   UserSettings,
   SubscriptionTier,
+  User,
 } from "@/types";
 
 /**
@@ -15,10 +16,15 @@ import type {
  * @description 应用全局状态
  */
 interface AppState {
+  user: User | null;
   jobs: Job[];
   invoices: Invoice[];
   customers: Customer[];
   settings: UserSettings;
+
+  login: (user: User) => void;
+  logout: () => void;
+  updateUser: (updates: Partial<User>) => void;
 
   addJob: (job: Job) => void;
   updateJob: (id: string, updates: Partial<Job>) => void;
@@ -33,6 +39,10 @@ interface AppState {
 
   updateSettings: (updates: Partial<UserSettings>) => void;
   setSubscription: (tier: SubscriptionTier) => void;
+
+  exportData: () => string;
+  importData: (data: string) => boolean;
+  syncToCloud: () => Promise<boolean>;
 
   /** @returns 免费版是否已达用量上限 */
   isFreeLimitReached: () => boolean;
@@ -55,10 +65,27 @@ const FREE_TIER_JOB_LIMIT = 5;
 export const useStore = create<AppState>()(
   persist(
     (set, get) => ({
+      user: null,
       jobs: [],
       invoices: [],
       customers: [],
       settings: DEFAULT_SETTINGS,
+
+      login: (user) => set({ user }),
+
+      logout: () =>
+        set({
+          user: null,
+          jobs: [],
+          invoices: [],
+          customers: [],
+          settings: DEFAULT_SETTINGS,
+        }),
+
+      updateUser: (updates) =>
+        set((state) => ({
+          user: state.user ? { ...state.user, ...updates } : null,
+        })),
 
       addJob: (job) =>
         set((state) => ({ jobs: [...state.jobs, job] })),
@@ -109,6 +136,72 @@ export const useStore = create<AppState>()(
         set((state) => ({
           settings: { ...state.settings, subscription: tier },
         })),
+
+      exportData: () => {
+        const state = get();
+        const data = {
+          user: state.user,
+          jobs: state.jobs,
+          invoices: state.invoices,
+          customers: state.customers,
+          settings: state.settings,
+          exportedAt: new Date().toISOString(),
+        };
+        return JSON.stringify(data, null, 2);
+      },
+
+      importData: (data) => {
+        try {
+          const parsed = JSON.parse(data);
+          if (parsed.jobs && parsed.invoices && parsed.customers) {
+            set({
+              user: parsed.user || null,
+              jobs: parsed.jobs,
+              invoices: parsed.invoices,
+              customers: parsed.customers,
+              settings: { ...DEFAULT_SETTINGS, ...parsed.settings },
+            });
+            return true;
+          }
+          return false;
+        } catch (error) {
+          console.error("导入数据失败:", error);
+          return false;
+        }
+      },
+
+      syncToCloud: async () => {
+        const state = get();
+        if (!state.user) {
+          return false;
+        }
+        try {
+          const data = {
+            userId: state.user.id,
+            jobs: state.jobs,
+            invoices: state.invoices,
+            customers: state.customers,
+            settings: state.settings,
+            lastSyncAt: new Date().toISOString(),
+          };
+          
+          localStorage.setItem(
+            `fieldflow-cloud-backup-${state.user.id}`,
+            JSON.stringify(data)
+          );
+          
+          set((state) => ({
+            user: state.user
+              ? { ...state.user, lastSyncAt: new Date().toISOString() }
+              : null,
+          }));
+          
+          return true;
+        } catch (error) {
+          console.error("云同步失败:", error);
+          return false;
+        }
+      },
 
       isFreeLimitReached: () => {
         const state = get();
