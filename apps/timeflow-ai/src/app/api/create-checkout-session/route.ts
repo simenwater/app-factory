@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import Stripe from 'stripe';
 
 /**
  * 创建 Stripe Checkout Session
@@ -20,7 +21,9 @@ export async function POST(request: Request) {
       );
     }
 
-    const stripe = require('stripe')(stripeSecretKey);
+    const stripe = new Stripe(stripeSecretKey, {
+      apiVersion: '2026-02-25.clover',
+    });
     
     const session = await stripe.checkout.sessions.create({
       mode: 'subscription',
