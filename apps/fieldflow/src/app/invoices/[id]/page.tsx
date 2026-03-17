@@ -46,7 +46,39 @@ export default function InvoiceDetailPage({
     downloadInvoicePDF(invoice, settings);
   };
 
-  const handleSend = () => {
+  /**
+   * @description 使用系统分享菜单发送 PDF
+   */
+  const handleShare = async () => {
+    try {
+      const { generateInvoicePDF } = await import("@/lib/pdf");
+      const doc = generateInvoicePDF(invoice, settings);
+      const pdfBlob = doc.output("blob");
+      const fileName = `invoice-${invoice.invoiceNumber}.pdf`;
+
+      if (navigator.share && navigator.canShare) {
+        const file = new File([pdfBlob], fileName, { type: "application/pdf" });
+        
+        if (navigator.canShare({ files: [file] })) {
+          await navigator.share({
+            title: `Invoice ${invoice.invoiceNumber}`,
+            text: `Invoice for ${invoice.customer.name}`,
+            files: [file],
+          });
+          
+          updateInvoice(id, { invoiceStatus: "sent" as InvoiceStatus });
+        } else {
+          alert("Your device does not support sharing PDF files. Use the Download button instead.");
+        }
+      } else {
+        alert("Sharing is not supported on this device. Use the Download button instead.");
+      }
+    } catch (error) {
+      console.error("Share failed:", error);
+    }
+  };
+
+  const handleMarkSent = () => {
     updateInvoice(id, { invoiceStatus: "sent" as InvoiceStatus });
   };
 
@@ -184,21 +216,27 @@ export default function InvoiceDetailPage({
         <div className="flex gap-3">
           <button
             onClick={handleDownloadPDF}
-            className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-primary py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-primary-dark"
+            className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-gray-600 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-gray-700"
           >
             <Download size={16} />
-            Download PDF
+            Download
           </button>
-          {invoice.invoiceStatus === "draft" && (
-            <button
-              onClick={handleSend}
-              className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-blue-500 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-blue-600"
-            >
-              <Send size={16} />
-              Mark as Sent
-            </button>
-          )}
+          <button
+            onClick={handleShare}
+            className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-primary py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-primary-dark"
+          >
+            <Send size={16} />
+            Send
+          </button>
         </div>
+        {invoice.invoiceStatus === "draft" && (
+          <button
+            onClick={handleMarkSent}
+            className="w-full rounded-xl border-2 border-blue-500 bg-transparent py-3 text-sm font-semibold text-blue-500 shadow-sm transition-colors hover:bg-blue-50 dark:hover:bg-blue-900/20"
+          >
+            Mark as Sent
+          </button>
+        )}
         <div className="flex gap-3">
           {invoice.paymentStatus !== "paid" && (
             <button

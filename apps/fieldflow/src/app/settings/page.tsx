@@ -1,7 +1,7 @@
 "use client";
 
 import { useStore } from "@/store/useStore";
-import { Moon, Sun, Crown, Check } from "lucide-react";
+import { Moon, Sun, Crown, Check, AlertTriangle } from "lucide-react";
 
 const CURRENCIES = ["USD", "EUR", "GBP", "CAD", "AUD", "JPY", "CNY"];
 
@@ -26,6 +26,21 @@ export default function SettingsPage() {
   return (
     <div className="px-4 pt-6">
       <h1 className="mb-6 text-2xl font-bold">Settings</h1>
+
+      {/* Data Storage Warning */}
+      <div className="mb-6 rounded-xl border-2 border-orange-500 bg-orange-50 p-4 dark:border-orange-400 dark:bg-orange-900/20">
+        <div className="flex items-start gap-3">
+          <AlertTriangle size={20} className="mt-0.5 flex-shrink-0 text-orange-600 dark:text-orange-400" />
+          <div>
+            <h3 className="mb-1 font-semibold text-orange-900 dark:text-orange-100">
+              Data Storage Notice
+            </h3>
+            <p className="text-sm text-orange-800 dark:text-orange-200">
+              Your data is stored locally on this device only. If you clear your browser data, switch devices, or lose your phone, all your jobs, invoices, and customer records will be permanently lost. Please regularly export and backup your important data.
+            </p>
+          </div>
+        </div>
+      </div>
 
       {/* Dark Mode Toggle */}
       <div className="mb-6 flex items-center justify-between rounded-xl bg-surface p-4 shadow-sm dark:bg-surface-dark">
