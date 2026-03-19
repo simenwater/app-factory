@@ -51,7 +51,7 @@ export function PolicyComparison({
         <div className="text-center py-8">
           <Sparkles className="w-8 h-8 text-slate-300 dark:text-slate-600 mx-auto mb-3" />
           <p className="text-sm text-slate-500 dark:text-slate-400">
-            暂无AI解读，点击"重新AI解读"按钮生成
+            暂无AI解读，点击上方按钮生成实时分析
           </p>
         </div>
       );

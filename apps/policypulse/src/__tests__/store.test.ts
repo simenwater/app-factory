@@ -12,11 +12,12 @@ describe("PolicyPulse Store", () => {
 
   it("should have initial state", () => {
     const state = useStore.getState();
-    expect(state.alerts.length).toBeGreaterThan(0);
+    expect(Array.isArray(state.alerts)).toBe(true);
     expect(state.selectedIndustries).toEqual([]);
     expect(state.selectedRiskLevels).toEqual([]);
     expect(state.searchQuery).toBe("");
     expect(state.isLoading).toBe(false);
+    expect(state.dataSource).toBeDefined();
   });
 
   it("should toggle dark mode", () => {

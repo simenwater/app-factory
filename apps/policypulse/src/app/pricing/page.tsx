@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { Suspense, useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import {
   Check,
@@ -15,10 +15,10 @@ import { useStore } from "@/store/useStore";
 import { subscriptionPlans } from "@/lib/mockData";
 
 /**
- * @component PricingPage
- * 订阅方案页面 — 集成Stripe支付流程
+ * @component PricingContent
+ * 订阅方案内容组件（包含 useSearchParams，需要 Suspense 包裹）
  */
-export default function PricingPage() {
+function PricingContent() {
   const tier = useStore((s) => s.settings.subscriptionTier);
   const setSubscriptionTier = useStore((s) => s.setSubscriptionTier);
   const searchParams = useSearchParams();
@@ -80,7 +80,7 @@ export default function PricingPage() {
   };
 
   return (
-    <div className="p-4 md:p-8 max-w-5xl mx-auto">
+    <>
       {/* Success Banner */}
       {showSuccess && (
         <div className="bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-800 rounded-xl p-4 mb-6 flex items-center gap-3">
@@ -256,6 +256,26 @@ export default function PricingPage() {
           由 Stripe 提供安全支付服务 · PCI DSS Level 1 合规
         </p>
       </div>
+    </>
+  );
+}
+
+/**
+ * @component PricingPage
+ * 订阅方案页面 — 集成Stripe支付流程
+ */
+export default function PricingPage() {
+  return (
+    <div className="p-4 md:p-8 max-w-5xl mx-auto">
+      <Suspense
+        fallback={
+          <div className="flex items-center justify-center py-20">
+            <Loader2 className="w-6 h-6 text-blue-500 animate-spin" />
+          </div>
+        }
+      >
+        <PricingContent />
+      </Suspense>
     </div>
   );
 }
