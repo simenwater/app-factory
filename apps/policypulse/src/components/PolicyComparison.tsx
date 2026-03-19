@@ -1,29 +1,90 @@
 "use client";
 
 import { useState } from "react";
-import { FileText, Sparkles, Lock } from "lucide-react";
+import { FileText, Sparkles, Lock, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useStore } from "@/store/useStore";
 
 /**
  * @component PolicyComparison
- * 政策原文与 AI 解读对照组件
+ * 政策原文与 AI 解读对照组件 — 支持实时AI解读的加载状态
  * @param {Object} props
  * @param {string} props.originalText - 政策原文
  * @param {string} props.aiInterpretation - AI 解读
+ * @param {boolean} props.isLoadingAI - AI解读加载状态
  */
 export function PolicyComparison({
   originalText,
   aiInterpretation,
+  isLoadingAI = false,
 }: {
   originalText: string;
   aiInterpretation: string;
+  isLoadingAI?: boolean;
 }) {
   const [activeTab, setActiveTab] = useState<"comparison" | "original" | "ai">(
     "comparison"
   );
   const tier = useStore((s) => s.settings.subscriptionTier);
   const isPro = tier === "pro";
+
+  /**
+   * 渲染AI解读内容区域
+   */
+  const renderAIContent = () => {
+    if (isLoadingAI) {
+      return (
+        <div className="flex flex-col items-center justify-center py-8">
+          <Loader2 className="w-6 h-6 text-blue-500 animate-spin mb-3" />
+          <p className="text-sm text-slate-500 dark:text-slate-400">
+            AI 正在实时分析该政策...
+          </p>
+          <p className="text-xs text-slate-400 mt-1">
+            基于政策原文生成针对性解读
+          </p>
+        </div>
+      );
+    }
+
+    if (!aiInterpretation) {
+      return (
+        <div className="text-center py-8">
+          <Sparkles className="w-8 h-8 text-slate-300 dark:text-slate-600 mx-auto mb-3" />
+          <p className="text-sm text-slate-500 dark:text-slate-400">
+            暂无AI解读，点击"重新AI解读"按钮生成
+          </p>
+        </div>
+      );
+    }
+
+    if (isPro) {
+      return (
+        <div className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-wrap">
+          {aiInterpretation}
+        </div>
+      );
+    }
+
+    return (
+      <div className="relative">
+        <div className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-wrap line-clamp-4">
+          {aiInterpretation}
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/80 to-white dark:via-slate-900/80 dark:to-slate-900 flex flex-col items-center justify-end pb-4">
+          <Lock className="w-5 h-5 text-slate-400 mb-2" />
+          <p className="text-sm text-slate-500 dark:text-slate-400 mb-2">
+            升级专业版查看完整 AI 解读
+          </p>
+          <Link
+            href="/pricing"
+            className="px-4 py-1.5 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            立即升级
+          </Link>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
@@ -57,6 +118,9 @@ export function PolicyComparison({
           }`}
         >
           AI 解读
+          {isLoadingAI && (
+            <Loader2 className="inline w-3 h-3 ml-1 animate-spin" />
+          )}
         </button>
       </div>
 
@@ -80,29 +144,7 @@ export function PolicyComparison({
                 AI 人话解读
               </h4>
             </div>
-            {isPro ? (
-              <div className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-wrap">
-                {aiInterpretation}
-              </div>
-            ) : (
-              <div className="relative">
-                <div className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-wrap line-clamp-4">
-                  {aiInterpretation}
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/80 to-white dark:via-slate-900/80 dark:to-slate-900 flex flex-col items-center justify-end pb-4">
-                  <Lock className="w-5 h-5 text-slate-400 mb-2" />
-                  <p className="text-sm text-slate-500 dark:text-slate-400 mb-2">
-                    升级专业版查看完整 AI 解读
-                  </p>
-                  <Link
-                    href="/pricing"
-                    className="px-4 py-1.5 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-colors"
-                  >
-                    立即升级
-                  </Link>
-                </div>
-              </div>
-            )}
+            {renderAIContent()}
           </div>
         </div>
       )}
@@ -129,24 +171,7 @@ export function PolicyComparison({
               AI 人话解读
             </h4>
           </div>
-          {isPro ? (
-            <div className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-wrap">
-              {aiInterpretation}
-            </div>
-          ) : (
-            <div className="text-center py-8">
-              <Lock className="w-8 h-8 text-slate-300 dark:text-slate-600 mx-auto mb-3" />
-              <p className="text-slate-500 dark:text-slate-400 mb-3">
-                完整 AI 解读为专业版功能
-              </p>
-              <Link
-                href="/pricing"
-                className="inline-block px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-              >
-                升级专业版 — $14.99/月
-              </Link>
-            </div>
-          )}
+          {renderAIContent()}
         </div>
       )}
     </div>

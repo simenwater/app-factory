@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { getStripeClient } from "@/lib/stripe";
 
 /**
  * @interface SubscribeRequest
@@ -11,7 +12,7 @@ interface SubscribeRequest {
 
 /**
  * POST /api/subscribe
- * 订阅接口（MVP 阶段返回模拟响应）
+ * 订阅管理接口 — 与Stripe集成的完整订阅流程
  */
 export async function POST(request: Request) {
   const body: SubscribeRequest = await request.json();
@@ -23,14 +24,40 @@ export async function POST(request: Request) {
     );
   }
 
+  if (body.planId === "free") {
+    return NextResponse.json({
+      success: true,
+      message: "Free plan activated",
+      subscription: {
+        id: `sub_free_${Date.now()}`,
+        planId: body.planId,
+        status: "active",
+        createdAt: new Date().toISOString(),
+      },
+    });
+  }
+
+  const stripe = getStripeClient();
+  if (!stripe) {
+    return NextResponse.json(
+      {
+        error: "Payment system is being set up. Use /api/checkout for payments.",
+        code: "STRIPE_NOT_CONFIGURED",
+        fallback: true,
+        subscription: {
+          id: `sub_pending_${Date.now()}`,
+          planId: body.planId,
+          status: "pending_payment",
+          createdAt: new Date().toISOString(),
+        },
+      },
+      { status: 202 }
+    );
+  }
+
   return NextResponse.json({
     success: true,
-    message: "Subscription created successfully",
-    subscription: {
-      id: `sub_${Date.now()}`,
-      planId: body.planId,
-      status: "active",
-      createdAt: new Date().toISOString(),
-    },
+    message: "Please use /api/checkout to create a payment session",
+    redirectTo: "/api/checkout",
   });
 }

@@ -2,8 +2,12 @@
 
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { PolicyAlert, UserSettings, IndustryType, RiskLevel } from "@/types";
-import { mockAlerts } from "@/lib/mockData";
+import type {
+  PolicyAlert,
+  UserSettings,
+  IndustryType,
+  RiskLevel,
+} from "@/types";
 
 /**
  * @interface PolicyPulseState
@@ -16,8 +20,11 @@ interface PolicyPulseState {
   selectedRiskLevels: RiskLevel[];
   searchQuery: string;
   isLoading: boolean;
+  dataSource: "live" | "cache" | "initializing";
+  lastFetchedAt: string | null;
 
   setAlerts: (alerts: PolicyAlert[]) => void;
+  fetchAlerts: () => Promise<void>;
   toggleDarkMode: () => void;
   setSubscribedIndustries: (industries: IndustryType[]) => void;
   toggleIndustryFilter: (industry: IndustryType) => void;
@@ -35,8 +42,8 @@ interface PolicyPulseState {
  */
 export const useStore = create<PolicyPulseState>()(
   persist(
-    (set) => ({
-      alerts: mockAlerts,
+    (set, get) => ({
+      alerts: [],
       settings: {
         darkMode: false,
         subscribedIndustries: [],
@@ -48,12 +55,47 @@ export const useStore = create<PolicyPulseState>()(
       selectedRiskLevels: [],
       searchQuery: "",
       isLoading: false,
+      dataSource: "initializing",
+      lastFetchedAt: null,
 
       setAlerts: (alerts) => set({ alerts }),
 
+      /**
+       * 从API获取真实政策数据
+       */
+      fetchAlerts: async () => {
+        const state = get();
+        if (state.isLoading) return;
+
+        set({ isLoading: true });
+        try {
+          const params = new URLSearchParams();
+          if (state.searchQuery) {
+            params.set("search", state.searchQuery);
+          }
+
+          const response = await fetch(`/api/policies?${params.toString()}`);
+          if (!response.ok) throw new Error("API request failed");
+
+          const result = await response.json();
+          set({
+            alerts: result.data,
+            dataSource: result.source || "live",
+            lastFetchedAt: new Date().toISOString(),
+            isLoading: false,
+          });
+        } catch (error) {
+          console.error("Failed to fetch alerts:", error);
+          set({ isLoading: false, dataSource: "cache" });
+        }
+      },
+
       toggleDarkMode: () =>
         set((state) => ({
-          settings: { ...state.settings, darkMode: !state.settings.darkMode },
+          settings: {
+            ...state.settings,
+            darkMode: !state.settings.darkMode,
+          },
         })),
 
       setSubscribedIndustries: (industries) =>
