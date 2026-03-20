@@ -1,0 +1,10 @@
+{
+  "name": "ValuePricer",
+  "short_name": "ValuePricer",
+  "description": "B2B SaaS 定价策略工具 — 基于价值而非成本",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#7c3aed",
+  "icons": []
+}
