@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   description:
     "A simple, affordable mobile-first app for field service management for small businesses and solo contractors.",
   manifest: "/manifest.json",
+  icons: {
+    icon: "/icon.svg",
+    apple: "/icon.svg",
+  },
 };
 
 export const viewport: Viewport = {
