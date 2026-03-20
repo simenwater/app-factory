@@ -1,7 +1,7 @@
 {
   "name": "ValuePricer",
   "short_name": "ValuePricer",
-  "description": "B2B SaaS 定价策略工具 — 基于价值而非成本",
+  "description": "B2B SaaS Pricing Strategy Tool — Value-Based, Not Cost-Based",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f8fafc",

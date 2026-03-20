@@ -1,12 +1,14 @@
 import type { Metadata, Viewport } from "next";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { BottomNav } from "@/components/BottomNav";
+import { AuthProvider } from "@/components/AuthProvider";
+import { DataSync } from "@/components/DataSync";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "ValuePricer — B2B SaaS 定价策略工具",
+  title: "ValuePricer — B2B SaaS Pricing Strategy Tool",
   description:
-    "帮助技术创始人基于价值（而非成本）为 B2B SaaS 产品定价的智能工具。",
+    "A smart tool that helps technical founders price B2B SaaS products based on value, not cost.",
   manifest: "/manifest.json",
 };
 
@@ -18,7 +20,7 @@ export const viewport: Viewport = {
 };
 
 /**
- * @description 根布局组件
+ * @description Root layout component
  */
 export default function RootLayout({
   children,
@@ -26,14 +28,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="zh" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body className="bg-bg text-text antialiased dark:bg-bg-dark dark:text-text-dark">
-        <ThemeProvider>
-          <main className="mx-auto min-h-screen max-w-lg pb-20">
-            {children}
-          </main>
-          <BottomNav />
-        </ThemeProvider>
+        <AuthProvider>
+          <ThemeProvider>
+            <DataSync />
+            <main className="mx-auto min-h-screen max-w-lg pb-20">
+              {children}
+            </main>
+            <BottomNav />
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   );

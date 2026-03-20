@@ -5,17 +5,17 @@ import { usePathname } from "next/navigation";
 import { Calculator, FileText, BarChart3, Settings } from "lucide-react";
 
 /**
- * @description 底部导航栏配置项
+ * @description Bottom navigation bar items
  */
 const navItems = [
-  { href: "/", icon: Calculator, label: "计算器" },
-  { href: "/reports", icon: FileText, label: "报告" },
-  { href: "/pricing", icon: BarChart3, label: "定价" },
-  { href: "/settings", icon: Settings, label: "设置" },
+  { href: "/", icon: Calculator, label: "Calculator" },
+  { href: "/reports", icon: FileText, label: "Reports" },
+  { href: "/pricing", icon: BarChart3, label: "Pricing" },
+  { href: "/settings", icon: Settings, label: "Settings" },
 ];
 
 /**
- * @description 底部导航栏组件
+ * @description Bottom navigation bar component
  */
 export function BottomNav() {
   const pathname = usePathname();

@@ -53,7 +53,7 @@ describe("formatPercent", () => {
 });
 
 describe("formatDate", () => {
-  it("should format ISO date string", () => {
+  it("should format ISO date string in en-US format", () => {
     const result = formatDate("2025-01-15T12:00:00Z");
     expect(result).toBeTruthy();
     expect(typeof result).toBe("string");
@@ -62,10 +62,10 @@ describe("formatDate", () => {
 
 describe("customerSizeLabel", () => {
   it("should return correct labels", () => {
-    expect(customerSizeLabel("startup")).toBe("初创公司");
-    expect(customerSizeLabel("smb")).toBe("中小企业");
-    expect(customerSizeLabel("mid_market")).toBe("中型企业");
-    expect(customerSizeLabel("enterprise")).toBe("大型企业");
+    expect(customerSizeLabel("startup")).toBe("Startup");
+    expect(customerSizeLabel("smb")).toBe("SMB");
+    expect(customerSizeLabel("mid_market")).toBe("Mid-Market");
+    expect(customerSizeLabel("enterprise")).toBe("Enterprise");
   });
 
   it("should return raw value for unknown sizes", () => {

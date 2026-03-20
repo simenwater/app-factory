@@ -1,5 +1,6 @@
 "use client";
 
+import { useSession } from "next-auth/react";
 import { useStore } from "@/store/useStore";
 import { formatCurrency, formatDate } from "@/lib/utils";
 import { INDUSTRY_CONFIG } from "@/lib/pricing";
@@ -10,12 +11,14 @@ import {
   FileText,
   ArrowRight,
   Sparkles,
+  LogIn,
 } from "lucide-react";
 
 /**
- * @description 首页仪表盘，展示概览信息和快速操作
+ * @description Home dashboard showing overview and quick actions
  */
 export default function HomePage() {
+  const { data: session } = useSession();
   const inputs = useStore((s) => s.inputs);
   const recommendations = useStore((s) => s.recommendations);
   const tier = useStore((s) => s.settings.subscriptionTier);
@@ -33,7 +36,7 @@ export default function HomePage() {
             ValuePricer
           </h1>
           <p className="text-sm text-text-muted dark:text-text-muted-dark">
-            基于价值的 B2B SaaS 定价策略
+            Value-Based B2B SaaS Pricing Strategy
           </p>
         </div>
         {tier === "premium" && (
@@ -47,7 +50,7 @@ export default function HomePage() {
         <div className="rounded-xl bg-surface p-4 shadow-sm dark:bg-surface-dark">
           <div className="mb-1 flex items-center gap-2 text-text-muted dark:text-text-muted-dark">
             <Calculator size={14} />
-            <span className="text-xs">分析数量</span>
+            <span className="text-xs">Analyses</span>
           </div>
           <p className="text-2xl font-bold text-text dark:text-text-dark">
             {inputs.length}
@@ -56,7 +59,7 @@ export default function HomePage() {
         <div className="rounded-xl bg-surface p-4 shadow-sm dark:bg-surface-dark">
           <div className="mb-1 flex items-center gap-2 text-text-muted dark:text-text-muted-dark">
             <TrendingUp size={14} />
-            <span className="text-xs">总价值</span>
+            <span className="text-xs">Total Value</span>
           </div>
           <p className="text-2xl font-bold text-primary">
             {formatCurrency(totalValue)}
@@ -64,25 +67,43 @@ export default function HomePage() {
         </div>
       </div>
 
-      <Link
-        href="/calculator"
-        className="mb-6 flex items-center justify-between rounded-xl bg-primary p-4 text-white shadow-md transition-transform active:scale-[0.98]"
-      >
-        <div className="flex items-center gap-3">
-          <div className="rounded-lg bg-white/20 p-2">
-            <Sparkles size={20} />
+      {!session ? (
+        <Link
+          href="/auth/signin"
+          className="mb-6 flex items-center justify-between rounded-xl bg-primary p-4 text-white shadow-md transition-transform active:scale-[0.98]"
+        >
+          <div className="flex items-center gap-3">
+            <div className="rounded-lg bg-white/20 p-2">
+              <LogIn size={20} />
+            </div>
+            <div>
+              <p className="font-semibold">Sign In to Get Started</p>
+              <p className="text-xs text-white/80">Save your analyses across devices</p>
+            </div>
           </div>
-          <div>
-            <p className="font-semibold">开始新的定价分析</p>
-            <p className="text-xs text-white/80">输入客户价值，获取定价建议</p>
+          <ArrowRight size={20} />
+        </Link>
+      ) : (
+        <Link
+          href="/calculator"
+          className="mb-6 flex items-center justify-between rounded-xl bg-primary p-4 text-white shadow-md transition-transform active:scale-[0.98]"
+        >
+          <div className="flex items-center gap-3">
+            <div className="rounded-lg bg-white/20 p-2">
+              <Sparkles size={20} />
+            </div>
+            <div>
+              <p className="font-semibold">Start New Pricing Analysis</p>
+              <p className="text-xs text-white/80">Enter customer value, get pricing recommendations</p>
+            </div>
           </div>
-        </div>
-        <ArrowRight size={20} />
-      </Link>
+          <ArrowRight size={20} />
+        </Link>
+      )}
 
       <div className="mb-4">
         <h2 className="mb-3 text-lg font-semibold text-text dark:text-text-dark">
-          最近报告
+          Recent Reports
         </h2>
         {recommendations.length === 0 ? (
           <div className="rounded-xl bg-surface p-6 text-center shadow-sm dark:bg-surface-dark">
@@ -91,7 +112,7 @@ export default function HomePage() {
               className="mx-auto mb-2 text-text-muted dark:text-text-muted-dark"
             />
             <p className="text-sm text-text-muted dark:text-text-muted-dark">
-              还没有报告，开始第一次分析吧！
+              No reports yet. Start your first analysis!
             </p>
           </div>
         ) : (

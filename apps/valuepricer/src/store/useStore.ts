@@ -11,7 +11,8 @@ const defaultSettings: UserSettings = {
 };
 
 /**
- * @description 全局状态管理 Store，使用 Zustand + persist 持久化
+ * @description Global state store using Zustand with localStorage persistence.
+ * When the user is authenticated, data is also synced to the server via API calls.
  */
 export const useStore = create<AppState>()(
   persist(
@@ -50,6 +51,9 @@ export const useStore = create<AppState>()(
           recommendations: [],
           settings: defaultSettings,
         }),
+
+      setInputs: (inputs: ValueInput[]) => set({ inputs }),
+      setRecommendations: (recommendations: PricingRecommendation[]) => set({ recommendations }),
     }),
     { name: "valuepricer-storage" }
   )

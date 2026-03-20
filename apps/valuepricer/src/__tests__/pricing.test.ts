@@ -8,7 +8,7 @@ import {
 import type { ValueInput } from "@/types";
 
 /**
- * @description 创建测试用的 ValueInput 数据
+ * @description Create test ValueInput data
  */
 function createTestInput(overrides?: Partial<ValueInput>): ValueInput {
   return {
@@ -181,7 +181,7 @@ describe("generatePricingRecommendation", () => {
   it("should handle input without competitor price", () => {
     const input = createTestInput({ competitorPrice: 0 });
     const rec = generatePricingRecommendation(input);
-    expect(rec.competitorComparison).toContain("未提供竞品价格信息");
+    expect(rec.competitorComparison).toContain("No competitor pricing provided");
   });
 
   it("should compute positive ROI for reasonable inputs", () => {

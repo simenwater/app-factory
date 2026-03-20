@@ -2,18 +2,20 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import { useStore } from "@/store/useStore";
 import { generateId } from "@/lib/utils";
 import { INDUSTRY_CONFIG, generatePricingRecommendation } from "@/lib/pricing";
 import type { Industry, ValueInput } from "@/types";
-import { ArrowLeft, Sparkles } from "lucide-react";
+import { ArrowLeft, Sparkles, Loader2 } from "lucide-react";
 import Link from "next/link";
 
 /**
- * @description 客户价值量化输入表单页面
+ * @description Customer value quantification form page
  */
 export default function CalculatorPage() {
   const router = useRouter();
+  const { data: session } = useSession();
   const addInput = useStore((s) => s.addInput);
   const addRecommendation = useStore((s) => s.addRecommendation);
   const tier = useStore((s) => s.settings.subscriptionTier);
@@ -31,42 +33,79 @@ export default function CalculatorPage() {
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isGenerating, setIsGenerating] = useState(false);
 
   /**
-   * @description 表单验证
+   * @description Validate form fields
    */
   function validate(): boolean {
     const newErrors: Record<string, string> = {};
-    if (!form.productName.trim()) newErrors.productName = "请输入产品名称";
-    if (form.engineerCount <= 0) newErrors.engineerCount = "请输入有效数值";
-    if (form.avgHourlyCost <= 0) newErrors.avgHourlyCost = "请输入有效数值";
+    if (!form.productName.trim()) newErrors.productName = "Please enter a product name";
+    if (form.engineerCount <= 0) newErrors.engineerCount = "Please enter a valid number";
+    if (form.avgHourlyCost <= 0) newErrors.avgHourlyCost = "Please enter a valid number";
     if (form.hoursSavedPerWeek <= 0)
-      newErrors.hoursSavedPerWeek = "请输入有效数值";
+      newErrors.hoursSavedPerWeek = "Please enter a valid number";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   }
 
   /**
-   * @description 提交表单，生成定价推荐
+   * @description Submit form and generate pricing recommendation
    */
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!validate()) return;
 
-    const input: ValueInput = {
-      id: generateId(),
-      createdAt: new Date().toISOString(),
-      ...form,
-    };
+    setIsGenerating(true);
 
-    addInput(input);
-    const recommendation = generatePricingRecommendation(input);
-    addRecommendation(recommendation);
-    router.push(`/reports/${recommendation.id}`);
+    try {
+      let inputId = generateId();
+      const createdAt = new Date().toISOString();
+
+      const input: ValueInput = {
+        id: inputId,
+        createdAt,
+        ...form,
+      };
+
+      if (session?.user) {
+        const inputRes = await fetch("/api/data/inputs", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(form),
+        });
+        if (inputRes.ok) {
+          const savedInput = await inputRes.json();
+          inputId = savedInput.id;
+          input.id = savedInput.id;
+          input.createdAt = savedInput.createdAt;
+        }
+      }
+
+      addInput(input);
+      const recommendation = generatePricingRecommendation(input);
+
+      if (session?.user) {
+        const recRes = await fetch("/api/data/recommendations", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(recommendation),
+        });
+        if (recRes.ok) {
+          const savedRec = await recRes.json();
+          recommendation.id = savedRec.id;
+        }
+      }
+
+      addRecommendation(recommendation);
+      router.push(`/reports/${recommendation.id}`);
+    } finally {
+      setIsGenerating(false);
+    }
   }
 
   /**
-   * @description 更新表单字段
+   * @description Update form field value
    */
   function updateField(field: string, value: string | number) {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -96,10 +135,10 @@ export default function CalculatorPage() {
         </Link>
         <div>
           <h1 className="text-xl font-bold text-text dark:text-text-dark">
-            价值量化计算器
+            Value Calculator
           </h1>
           <p className="text-xs text-text-muted dark:text-text-muted-dark">
-            输入客户获得的价值，生成定价策略
+            Enter customer value to generate a pricing strategy
           </p>
         </div>
       </div>
@@ -107,15 +146,15 @@ export default function CalculatorPage() {
       <form onSubmit={handleSubmit} className="space-y-5">
         <div className="rounded-xl bg-surface p-4 shadow-sm dark:bg-surface-dark">
           <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-text-muted dark:text-text-muted-dark">
-            基本信息
+            Basic Information
           </h2>
 
           <div className="mb-4">
-            <label className={labelClass}>产品名称 *</label>
+            <label className={labelClass}>Product Name *</label>
             <input
               type="text"
               className={inputClass}
-              placeholder="例如: DataSync Pro"
+              placeholder="e.g. DataSync Pro"
               value={form.productName}
               onChange={(e) => updateField("productName", e.target.value)}
             />
@@ -125,7 +164,7 @@ export default function CalculatorPage() {
           </div>
 
           <div className="mb-4">
-            <label className={labelClass}>所属行业</label>
+            <label className={labelClass}>Industry</label>
             <select
               className={inputClass}
               value={form.industry}
@@ -140,7 +179,7 @@ export default function CalculatorPage() {
           </div>
 
           <div>
-            <label className={labelClass}>目标客户规模</label>
+            <label className={labelClass}>Target Customer Size</label>
             <select
               className={inputClass}
               value={form.targetCustomerSize}
@@ -148,21 +187,21 @@ export default function CalculatorPage() {
                 updateField("targetCustomerSize", e.target.value)
               }
             >
-              <option value="startup">初创公司 (1-10人)</option>
-              <option value="smb">中小企业 (10-100人)</option>
-              <option value="mid_market">中型企业 (100-1000人)</option>
-              <option value="enterprise">大型企业 (1000+人)</option>
+              <option value="startup">Startup (1-10 people)</option>
+              <option value="smb">SMB (10-100 people)</option>
+              <option value="mid_market">Mid-Market (100-1,000 people)</option>
+              <option value="enterprise">Enterprise (1,000+ people)</option>
             </select>
           </div>
         </div>
 
         <div className="rounded-xl bg-surface p-4 shadow-sm dark:bg-surface-dark">
           <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-text-muted dark:text-text-muted-dark">
-            价值量化
+            Value Quantification
           </h2>
 
           <div className="mb-4">
-            <label className={labelClass}>受影响的工程师数量 *</label>
+            <label className={labelClass}>Number of Engineers Impacted *</label>
             <input
               type="number"
               className={inputClass}
@@ -178,7 +217,7 @@ export default function CalculatorPage() {
           </div>
 
           <div className="mb-4">
-            <label className={labelClass}>工程师平均时薪 (USD) *</label>
+            <label className={labelClass}>Average Engineer Hourly Cost (USD) *</label>
             <input
               type="number"
               className={inputClass}
@@ -194,7 +233,7 @@ export default function CalculatorPage() {
           </div>
 
           <div className="mb-4">
-            <label className={labelClass}>每周节省的小时数 *</label>
+            <label className={labelClass}>Hours Saved Per Week *</label>
             <input
               type="number"
               className={inputClass}
@@ -214,7 +253,7 @@ export default function CalculatorPage() {
           </div>
 
           <div>
-            <label className={labelClass}>其他每月成本节省 (USD)</label>
+            <label className={labelClass}>Other Monthly Cost Savings (USD)</label>
             <input
               type="number"
               className={inputClass}
@@ -228,18 +267,18 @@ export default function CalculatorPage() {
               }
             />
             <p className="mt-1 text-xs text-text-muted dark:text-text-muted-dark">
-              包括基础设施、工具许可证等节省
+              Including infrastructure, tool licenses, etc.
             </p>
           </div>
         </div>
 
         <div className="rounded-xl bg-surface p-4 shadow-sm dark:bg-surface-dark">
           <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-text-muted dark:text-text-muted-dark">
-            市场信息（可选）
+            Market Information (Optional)
           </h2>
 
           <div className="mb-4">
-            <label className={labelClass}>竞品月度价格 (USD)</label>
+            <label className={labelClass}>Competitor Monthly Price (USD)</label>
             <input
               type="number"
               className={inputClass}
@@ -250,17 +289,17 @@ export default function CalculatorPage() {
               }
             />
             <p className="mt-1 text-xs text-text-muted dark:text-text-muted-dark">
-              填写后可获取竞品对比分析
-              {tier === "free" && " (Premium 解锁详细竞品数据)"}
+              Enter to get competitor comparison analysis
+              {tier === "free" && " (Premium unlocks detailed competitor data)"}
             </p>
           </div>
 
           <div>
-            <label className={labelClass}>当前流程描述</label>
+            <label className={labelClass}>Current Process Description</label>
             <textarea
               className={inputClass}
               rows={3}
-              placeholder="描述客户当前使用的手动/替代方案..."
+              placeholder="Describe the customer's current manual/alternative solution..."
               value={form.currentProcessDescription}
               onChange={(e) =>
                 updateField("currentProcessDescription", e.target.value)
@@ -271,10 +310,20 @@ export default function CalculatorPage() {
 
         <button
           type="submit"
-          className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-3 font-semibold text-white shadow-md transition-colors hover:bg-primary-dark active:scale-[0.98]"
+          disabled={isGenerating}
+          className="flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-3 font-semibold text-white shadow-md transition-colors hover:bg-primary-dark active:scale-[0.98] disabled:opacity-70"
         >
-          <Sparkles size={18} />
-          生成定价策略
+          {isGenerating ? (
+            <>
+              <Loader2 size={18} className="animate-spin" />
+              Generating...
+            </>
+          ) : (
+            <>
+              <Sparkles size={18} />
+              Generate Pricing Strategy
+            </>
+          )}
         </button>
       </form>
     </div>
