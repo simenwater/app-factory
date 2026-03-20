@@ -8,7 +8,7 @@ import { FileText, Trash2 } from "lucide-react";
 import Link from "next/link";
 
 /**
- * @description 报告列表页面，展示所有已生成的定价策略报告
+ * @description Reports list page showing all generated pricing strategy reports
  */
 export default function ReportsPage() {
   const recommendations = useStore((s) => s.recommendations);
@@ -18,12 +18,12 @@ export default function ReportsPage() {
     return (
       <div className="p-4">
         <h1 className="mb-6 text-2xl font-bold text-text dark:text-text-dark">
-          定价报告
+          Pricing Reports
         </h1>
         <EmptyState
           icon={FileText}
-          title="还没有报告"
-          description="使用计算器分析客户价值后，定价策略报告会出现在这里。"
+          title="No reports yet"
+          description="After analyzing customer value with the calculator, your pricing strategy reports will appear here."
         />
       </div>
     );
@@ -33,10 +33,10 @@ export default function ReportsPage() {
     <div className="p-4">
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-2xl font-bold text-text dark:text-text-dark">
-          定价报告
+          Pricing Reports
         </h1>
         <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-          {recommendations.length} 份
+          {recommendations.length} {recommendations.length === 1 ? "report" : "reports"}
         </span>
       </div>
 
@@ -79,7 +79,7 @@ export default function ReportsPage() {
             </Link>
             <div className="flex items-center justify-between border-t border-border px-4 py-2 dark:border-border-dark">
               <p className="text-xs text-success">
-                月价值: {formatCurrency(rec.totalValueDelivered)} · ROI{" "}
+                Monthly Value: {formatCurrency(rec.totalValueDelivered)} · ROI{" "}
                 {rec.roi.toFixed(1)}x
               </p>
               <button

@@ -1,5 +1,5 @@
 /**
- * @description 行业类型
+ * @description Industry type
  */
 export type Industry =
   | "saas"
@@ -13,7 +13,7 @@ export type Industry =
   | "other";
 
 /**
- * @description 行业配置信息
+ * @description Industry configuration
  */
 export interface IndustryConfig {
   label: string;
@@ -22,12 +22,12 @@ export interface IndustryConfig {
 }
 
 /**
- * @description 订阅层级
+ * @description Subscription tier
  */
 export type SubscriptionTier = "free" | "premium";
 
 /**
- * @description 定价模型类型
+ * @description Pricing model type
  */
 export type PricingModelType =
   | "value_based"
@@ -37,7 +37,7 @@ export type PricingModelType =
   | "flat_rate";
 
 /**
- * @description 客户价值量化输入
+ * @description Customer value quantification input
  */
 export interface ValueInput {
   id: string;
@@ -54,7 +54,7 @@ export interface ValueInput {
 }
 
 /**
- * @description 定价层级建议
+ * @description Pricing tier recommendation
  */
 export interface PricingTier {
   name: string;
@@ -65,7 +65,7 @@ export interface PricingTier {
 }
 
 /**
- * @description 定价推荐结果
+ * @description Pricing recommendation result
  */
 export interface PricingRecommendation {
   id: string;
@@ -83,7 +83,7 @@ export interface PricingRecommendation {
 }
 
 /**
- * @description 用户设置
+ * @description User settings
  */
 export interface UserSettings {
   darkMode: boolean;
@@ -92,7 +92,7 @@ export interface UserSettings {
 }
 
 /**
- * @description 应用状态
+ * @description Application state
  */
 export interface AppState {
   inputs: ValueInput[];
@@ -104,4 +104,6 @@ export interface AppState {
   removeRecommendation: (id: string) => void;
   updateSettings: (settings: Partial<UserSettings>) => void;
   resetStore: () => void;
+  setInputs: (inputs: ValueInput[]) => void;
+  setRecommendations: (recommendations: PricingRecommendation[]) => void;
 }

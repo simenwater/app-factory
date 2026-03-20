@@ -9,22 +9,22 @@ import type {
 import { generateId } from "./utils";
 
 /**
- * @description 行业配置表，包含定价乘数和基准价格区间
+ * @description Industry configuration table with pricing multipliers and benchmark ranges
  */
 export const INDUSTRY_CONFIG: Record<Industry, IndustryConfig> = {
-  saas: { label: "SaaS / 云服务", avgMultiplier: 0.15, benchmarkRange: [49, 499] },
-  fintech: { label: "金融科技", avgMultiplier: 0.2, benchmarkRange: [99, 999] },
-  healthtech: { label: "医疗科技", avgMultiplier: 0.18, benchmarkRange: [79, 799] },
-  devtools: { label: "开发者工具", avgMultiplier: 0.12, benchmarkRange: [19, 299] },
-  martech: { label: "营销科技", avgMultiplier: 0.14, benchmarkRange: [49, 599] },
-  hrtech: { label: "人力资源科技", avgMultiplier: 0.13, benchmarkRange: [39, 399] },
-  cybersecurity: { label: "网络安全", avgMultiplier: 0.22, benchmarkRange: [99, 1299] },
-  ecommerce: { label: "电子商务", avgMultiplier: 0.1, benchmarkRange: [29, 499] },
-  other: { label: "其他", avgMultiplier: 0.12, benchmarkRange: [29, 399] },
+  saas: { label: "SaaS / Cloud Services", avgMultiplier: 0.15, benchmarkRange: [49, 499] },
+  fintech: { label: "FinTech", avgMultiplier: 0.2, benchmarkRange: [99, 999] },
+  healthtech: { label: "HealthTech", avgMultiplier: 0.18, benchmarkRange: [79, 799] },
+  devtools: { label: "Developer Tools", avgMultiplier: 0.12, benchmarkRange: [19, 299] },
+  martech: { label: "MarTech", avgMultiplier: 0.14, benchmarkRange: [49, 599] },
+  hrtech: { label: "HR Tech", avgMultiplier: 0.13, benchmarkRange: [39, 399] },
+  cybersecurity: { label: "Cybersecurity", avgMultiplier: 0.22, benchmarkRange: [99, 1299] },
+  ecommerce: { label: "E-Commerce", avgMultiplier: 0.1, benchmarkRange: [29, 499] },
+  other: { label: "Other", avgMultiplier: 0.12, benchmarkRange: [29, 399] },
 };
 
 /**
- * @description 客户规模对定价的影响系数
+ * @description Customer size multiplier for pricing adjustments
  */
 const SIZE_MULTIPLIER: Record<string, number> = {
   startup: 0.6,
@@ -34,9 +34,9 @@ const SIZE_MULTIPLIER: Record<string, number> = {
 };
 
 /**
- * @description 计算客户每月获得的总价值
- * @param {ValueInput} input - 价值输入
- * @returns {number} 每月总价值（美元）
+ * @description Calculate the total monthly value delivered to the customer
+ * @param {ValueInput} input - Value input
+ * @returns {number} Monthly total value (USD)
  */
 export function calculateMonthlyValue(input: ValueInput): number {
   const weeklyTimeSavings = input.engineerCount * input.hoursSavedPerWeek * input.avgHourlyCost;
@@ -45,9 +45,9 @@ export function calculateMonthlyValue(input: ValueInput): number {
 }
 
 /**
- * @description 推荐最适合的定价模型
- * @param {ValueInput} input - 价值输入
- * @returns {{ model: PricingModelType; reasoning: string }} 推荐的定价模型和原因
+ * @description Recommend the most suitable pricing model
+ * @param {ValueInput} input - Value input
+ * @returns {{ model: PricingModelType; reasoning: string }} Recommended pricing model and rationale
  */
 export function recommendPricingModel(input: ValueInput): {
   model: PricingModelType;
@@ -57,7 +57,7 @@ export function recommendPricingModel(input: ValueInput): {
     return {
       model: "per_seat",
       reasoning:
-        "大型企业客户且用户数多，按席位定价可以随客户规模线性增长，最大化收入。",
+        "For large enterprise customers with many users, per-seat pricing scales linearly with customer size, maximizing revenue.",
     };
   }
 
@@ -66,13 +66,13 @@ export function recommendPricingModel(input: ValueInput): {
       return {
         model: "usage_based",
         reasoning:
-          "开发者工具面向初创公司时，使用量计费降低入门门槛，利于用户增长。",
+          "Usage-based pricing lowers the barrier to entry for startups using developer tools, facilitating user growth.",
       };
     }
     return {
       model: "tiered",
       reasoning:
-        "SaaS/开发者工具适合分层定价，让不同规模的客户都能找到合适的方案。",
+        "Tiered pricing works well for SaaS/developer tools, allowing customers of different sizes to find the right plan.",
     };
   }
 
@@ -80,22 +80,22 @@ export function recommendPricingModel(input: ValueInput): {
     return {
       model: "flat_rate",
       reasoning:
-        "面向中小客户的简单定价方式，降低决策摩擦，提高转化率。",
+        "Simple flat-rate pricing for small and medium customers reduces decision friction and improves conversion rates.",
     };
   }
 
   return {
     model: "value_based",
     reasoning:
-      "基于您产品交付的可量化价值定价，确保价格与客户获得的ROI成正比。",
+      "Value-based pricing ensures the price is proportional to the quantifiable ROI your product delivers to the customer.",
   };
 }
 
 /**
- * @description 生成三层定价方案（基础/专业/企业）
- * @param {number} monthlyValue - 每月交付价值
- * @param {ValueInput} input - 价值输入
- * @returns {PricingTier[]} 三个定价层级
+ * @description Generate three pricing tiers (Starter/Pro/Enterprise)
+ * @param {number} monthlyValue - Monthly delivered value
+ * @param {ValueInput} input - Value input
+ * @returns {PricingTier[]} Three pricing tiers
  */
 export function generatePricingTiers(
   monthlyValue: number,
@@ -122,42 +122,42 @@ export function generatePricingTiers(
 
   return [
     {
-      name: "Starter 基础版",
+      name: "Starter",
       monthlyPrice: starterPrice,
       annualPrice: Math.round(starterPrice * 10),
       features: [
-        "核心功能访问",
-        "基础数据分析",
-        "邮件支持",
-        "最多 5 个用户",
+        "Core feature access",
+        "Basic analytics",
+        "Email support",
+        "Up to 5 users",
       ],
       valueCapture: starterPrice / monthlyValue,
     },
     {
-      name: "Pro 专业版",
+      name: "Pro",
       monthlyPrice: proPrice,
       annualPrice: Math.round(proPrice * 10),
       features: [
-        "所有基础版功能",
-        "高级数据分析与报告",
-        "优先技术支持",
-        "最多 25 个用户",
-        "API 访问",
-        "自定义集成",
+        "All Starter features",
+        "Advanced analytics & reports",
+        "Priority support",
+        "Up to 25 users",
+        "API access",
+        "Custom integrations",
       ],
       valueCapture: proPrice / monthlyValue,
     },
     {
-      name: "Enterprise 企业版",
+      name: "Enterprise",
       monthlyPrice: enterprisePrice,
       annualPrice: Math.round(enterprisePrice * 10),
       features: [
-        "所有专业版功能",
-        "无限用户",
-        "专属客户成功经理",
-        "SLA 保障",
-        "定制化部署",
-        "高级安全合规",
+        "All Pro features",
+        "Unlimited users",
+        "Dedicated customer success manager",
+        "SLA guarantee",
+        "Custom deployment",
+        "Advanced security & compliance",
       ],
       valueCapture: enterprisePrice / monthlyValue,
     },
@@ -165,7 +165,7 @@ export function generatePricingTiers(
 }
 
 /**
- * @description 生成关键洞察
+ * @description Generate key insights from analysis
  */
 function generateInsights(
   input: ValueInput,
@@ -176,39 +176,39 @@ function generateInsights(
   const industryConfig = INDUSTRY_CONFIG[input.industry];
 
   insights.push(
-    `您的产品每月为客户创造约 $${Math.round(monthlyValue).toLocaleString()} 的价值。`
+    `Your product delivers approximately $${Math.round(monthlyValue).toLocaleString()} in monthly value to customers.`
   );
 
   const proTier = tiers[1];
   const roi = monthlyValue / proTier.monthlyPrice;
   insights.push(
-    `以专业版定价计算，客户 ROI 约为 ${roi.toFixed(1)}x，这是一个有吸引力的投资回报率。`
+    `At the Pro tier price, customer ROI is approximately ${roi.toFixed(1)}x — an attractive return on investment.`
   );
 
   if (input.competitorPrice > 0) {
     const diff = proTier.monthlyPrice - input.competitorPrice;
     if (diff > 0) {
       insights.push(
-        `推荐定价比竞品高 $${Math.abs(diff)}，需确保在价值沟通上有充分说明。`
+        `Recommended pricing is $${Math.abs(diff)} above competitors. Ensure strong value communication to justify the premium.`
       );
     } else {
       insights.push(
-        `推荐定价比竞品低 $${Math.abs(diff)}，具备价格竞争优势。`
+        `Recommended pricing is $${Math.abs(diff)} below competitors, giving you a competitive price advantage.`
       );
     }
   }
 
   insights.push(
-    `${industryConfig.label}行业的典型月度定价区间为 $${industryConfig.benchmarkRange[0]}–$${industryConfig.benchmarkRange[1]}。`
+    `Typical monthly pricing in the ${industryConfig.label} industry ranges from $${industryConfig.benchmarkRange[0]}–$${industryConfig.benchmarkRange[1]}.`
   );
 
   if (proTier.valueCapture < 0.1) {
     insights.push(
-      "当前定价仅捕获不到 10% 的客户价值，有提价空间。"
+      "Current pricing captures less than 10% of customer value. There is room to increase prices."
     );
   } else if (proTier.valueCapture > 0.3) {
     insights.push(
-      "当前定价捕获超过 30% 的客户价值，需注意客户价格敏感度。"
+      "Current pricing captures over 30% of customer value. Be mindful of customer price sensitivity."
     );
   }
 
@@ -216,30 +216,30 @@ function generateInsights(
 }
 
 /**
- * @description 竞品对比分析
+ * @description Generate competitor comparison analysis
  */
 function generateCompetitorComparison(
   input: ValueInput,
   recommendedPrice: number
 ): string {
   if (input.competitorPrice <= 0) {
-    return "未提供竞品价格信息。建议调研同行业 3-5 个竞品的定价策略作为参考。";
+    return "No competitor pricing provided. We recommend researching 3-5 competitors in your industry for pricing reference.";
   }
 
   const ratio = recommendedPrice / input.competitorPrice;
   if (ratio > 1.3) {
-    return `推荐定价 ($${recommendedPrice}/月) 高于竞品 ($${input.competitorPrice}/月) 约 ${Math.round((ratio - 1) * 100)}%。溢价策略需要强有力的差异化价值支撑——确保您的产品在功能、服务和品牌上有明显优势。`;
+    return `Recommended pricing ($${recommendedPrice}/mo) is approximately ${Math.round((ratio - 1) * 100)}% above competitor ($${input.competitorPrice}/mo). A premium pricing strategy requires strong differentiation in features, service, and brand.`;
   }
   if (ratio < 0.7) {
-    return `推荐定价 ($${recommendedPrice}/月) 低于竞品 ($${input.competitorPrice}/月) 约 ${Math.round((1 - ratio) * 100)}%。这可作为市场渗透策略，但需确保长期可持续性和毛利率。`;
+    return `Recommended pricing ($${recommendedPrice}/mo) is approximately ${Math.round((1 - ratio) * 100)}% below competitor ($${input.competitorPrice}/mo). This can work as a market penetration strategy, but ensure long-term sustainability and margins.`;
   }
-  return `推荐定价 ($${recommendedPrice}/月) 与竞品 ($${input.competitorPrice}/月) 在相似区间。建议通过独特功能和更好的客户体验实现差异化。`;
+  return `Recommended pricing ($${recommendedPrice}/mo) is in a similar range to competitor ($${input.competitorPrice}/mo). Consider differentiating through unique features and superior customer experience.`;
 }
 
 /**
- * @description 核心算法：根据价值输入生成完整的定价推荐
- * @param {ValueInput} input - 客户价值量化输入
- * @returns {PricingRecommendation} 定价推荐结果
+ * @description Core algorithm: generate complete pricing recommendation from value input
+ * @param {ValueInput} input - Customer value quantification input
+ * @returns {PricingRecommendation} Pricing recommendation result
  */
 export function generatePricingRecommendation(
   input: ValueInput
