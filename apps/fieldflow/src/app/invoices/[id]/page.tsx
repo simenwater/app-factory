@@ -6,6 +6,7 @@ import {
   ArrowLeft,
   Download,
   Send,
+  Share2,
   CheckCircle2,
   Trash2,
 } from "lucide-react";
@@ -13,7 +14,7 @@ import { useRouter } from "next/navigation";
 import { useStore } from "@/store/useStore";
 import { StatusBadge } from "@/components/StatusBadge";
 import { formatCurrency, formatDate } from "@/lib/utils";
-import { downloadInvoicePDF } from "@/lib/pdf";
+import { downloadInvoicePDF, generateInvoicePDF } from "@/lib/pdf";
 import type { InvoiceStatus, PaymentStatus } from "@/types";
 
 /**
@@ -44,6 +45,35 @@ export default function InvoiceDetailPage({
 
   const handleDownloadPDF = () => {
     downloadInvoicePDF(invoice, settings);
+  };
+
+  /**
+   * @description 通过 Web Share API 分享发票 PDF
+   */
+  const handleShare = async () => {
+    try {
+      const doc = generateInvoicePDF(invoice, settings);
+      const pdfBlob = doc.output("blob");
+      const file = new File(
+        [pdfBlob],
+        `invoice-${invoice.invoiceNumber}.pdf`,
+        { type: "application/pdf" }
+      );
+
+      if (navigator.share && navigator.canShare?.({ files: [file] })) {
+        await navigator.share({
+          title: `Invoice #${invoice.invoiceNumber}`,
+          text: `Invoice #${invoice.invoiceNumber} — ${settings.businessName || "FieldFlow"}`,
+          files: [file],
+        });
+      } else {
+        downloadInvoicePDF(invoice, settings);
+      }
+    } catch (err) {
+      if ((err as Error).name !== "AbortError") {
+        downloadInvoicePDF(invoice, settings);
+      }
+    }
   };
 
   const handleSend = () => {
@@ -189,6 +219,15 @@ export default function InvoiceDetailPage({
             <Download size={16} />
             Download PDF
           </button>
+          <button
+            onClick={handleShare}
+            className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-indigo-500 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-indigo-600"
+          >
+            <Share2 size={16} />
+            Share
+          </button>
+        </div>
+        <div className="flex gap-3">
           {invoice.invoiceStatus === "draft" && (
             <button
               onClick={handleSend}

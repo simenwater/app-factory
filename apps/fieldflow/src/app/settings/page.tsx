@@ -1,16 +1,85 @@
 "use client";
 
+import { useRef, useState } from "react";
+import Link from "next/link";
 import { useStore } from "@/store/useStore";
-import { Moon, Sun, Crown, Check } from "lucide-react";
+import {
+  Moon,
+  Sun,
+  Crown,
+  Check,
+  Download,
+  Upload,
+  Shield,
+} from "lucide-react";
 
 const CURRENCIES = ["USD", "EUR", "GBP", "CAD", "AUD", "JPY", "CNY"];
 
 /**
- * @description 设置页面（含订阅管理和深色模式）
+ * @description 设置页面（含订阅管理、数据备份和深色模式）
  */
 export default function SettingsPage() {
-  const { settings, updateSettings, setSubscription, jobs, invoices } =
+  const { settings, updateSettings, setSubscription, jobs, invoices, customers } =
     useStore();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [importStatus, setImportStatus] = useState<string | null>(null);
+
+  /**
+   * @description 导出全部数据为 JSON 备份文件
+   */
+  const handleExportData = () => {
+    const data = {
+      version: 1,
+      exportedAt: new Date().toISOString(),
+      jobs,
+      invoices,
+      customers,
+      settings,
+    };
+    const blob = new Blob([JSON.stringify(data, null, 2)], {
+      type: "application/json",
+    });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `fieldflow-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  /**
+   * @description 从 JSON 备份文件恢复数据
+   */
+  const handleImportData = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        const data = JSON.parse(event.target?.result as string);
+        if (!data.jobs || !data.invoices || !data.settings) {
+          setImportStatus("Invalid backup file format.");
+          return;
+        }
+
+        const store = useStore.getState();
+        if (data.jobs) data.jobs.forEach((j: typeof jobs[0]) => store.addJob(j));
+        if (data.customers)
+          data.customers.forEach((c: typeof customers[0]) => store.addCustomer(c));
+        if (data.invoices)
+          data.invoices.forEach((inv: typeof invoices[0]) => store.addInvoice(inv));
+        if (data.settings) store.updateSettings(data.settings);
+
+        setImportStatus("Data restored successfully!");
+        setTimeout(() => setImportStatus(null), 3000);
+      } catch {
+        setImportStatus("Failed to read backup file.");
+      }
+    };
+    reader.readAsText(file);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
 
   const inputClass =
     "w-full rounded-xl border border-border bg-surface px-4 py-2.5 text-sm outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/20 dark:border-border-dark dark:bg-surface-dark";
@@ -229,6 +298,57 @@ export default function SettingsPage() {
             <span className="font-medium">{invoices.length}</span>
           </div>
         </div>
+      </section>
+
+      {/* Data Backup */}
+      <section className="mb-6">
+        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-text-muted dark:text-text-muted-dark">
+          Data Backup
+        </h2>
+        <div className="space-y-3">
+          <button
+            onClick={handleExportData}
+            className="flex w-full items-center justify-center gap-2 rounded-xl bg-surface py-3 text-sm font-semibold shadow-sm transition-colors hover:bg-gray-100 dark:bg-surface-dark dark:hover:bg-gray-800"
+          >
+            <Download size={16} className="text-primary" />
+            Export All Data
+          </button>
+          <button
+            onClick={() => fileInputRef.current?.click()}
+            className="flex w-full items-center justify-center gap-2 rounded-xl bg-surface py-3 text-sm font-semibold shadow-sm transition-colors hover:bg-gray-100 dark:bg-surface-dark dark:hover:bg-gray-800"
+          >
+            <Upload size={16} className="text-primary" />
+            Import Backup
+          </button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".json"
+            className="hidden"
+            onChange={handleImportData}
+          />
+          {importStatus && (
+            <p className="text-center text-sm text-primary">{importStatus}</p>
+          )}
+          <p className="text-center text-xs text-text-muted dark:text-text-muted-dark">
+            Your data is stored locally on this device. Export regularly to avoid
+            data loss.
+          </p>
+        </div>
+      </section>
+
+      {/* Legal */}
+      <section className="mb-6">
+        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-text-muted dark:text-text-muted-dark">
+          Legal
+        </h2>
+        <Link
+          href="/privacy"
+          className="flex items-center gap-3 rounded-xl bg-surface p-4 shadow-sm transition-colors hover:bg-gray-100 dark:bg-surface-dark dark:hover:bg-gray-800"
+        >
+          <Shield size={18} className="text-text-muted" />
+          <span className="text-sm font-medium">Privacy Policy</span>
+        </Link>
       </section>
     </div>
   );
