@@ -87,6 +87,19 @@ export interface Invoice {
 export type SubscriptionTier = "free" | "pro";
 
 /**
+ * @typedef {Object} User
+ * @description 用户账号信息
+ */
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  phone?: string;
+  createdAt: string;
+  lastSyncAt?: string;
+}
+
+/**
  * @typedef {Object} UserSettings
  * @description 用户配置
  */

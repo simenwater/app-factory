@@ -137,3 +137,41 @@ export function downloadInvoicePDF(
   const doc = generateInvoicePDF(invoice, settings);
   doc.save(`invoice-${invoice.invoiceNumber}.pdf`);
 }
+
+/**
+ * @description 分享 PDF 发票给客户
+ * @param {Invoice} invoice - 发票数据
+ * @param {UserSettings} settings - 用户设置
+ * @returns {Promise<boolean>} 分享是否成功
+ */
+export async function shareInvoicePDF(
+  invoice: Invoice,
+  settings: UserSettings
+): Promise<boolean> {
+  try {
+    const doc = generateInvoicePDF(invoice, settings);
+    const pdfBlob = doc.output("blob");
+    const fileName = `invoice-${invoice.invoiceNumber}.pdf`;
+    
+    if (navigator.share && navigator.canShare) {
+      const file = new File([pdfBlob], fileName, { type: "application/pdf" });
+      const shareData = {
+        files: [file],
+        title: `发票 #${invoice.invoiceNumber}`,
+        text: `发票 - ${invoice.customer.name}`,
+      };
+
+      if (navigator.canShare(shareData)) {
+        await navigator.share(shareData);
+        return true;
+      }
+    }
+    
+    downloadInvoicePDF(invoice, settings);
+    return false;
+  } catch (error) {
+    console.error("分享失败:", error);
+    downloadInvoicePDF(invoice, settings);
+    return false;
+  }
+}
