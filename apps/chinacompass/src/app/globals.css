@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-50: #fef3f2;
+  --color-brand-100: #fde6e4;
+  --color-brand-200: #fcd0cc;
+  --color-brand-300: #f9ada6;
+  --color-brand-400: #f47c72;
+  --color-brand-500: #e94e3f;
+  --color-brand-600: #d63a2c;
+  --color-brand-700: #b42b1f;
+  --color-brand-800: #94271d;
+  --color-brand-900: #7b261e;
+
+  --color-navy-50: #f0f4ff;
+  --color-navy-100: #e0e8ff;
+  --color-navy-200: #c7d4fe;
+  --color-navy-300: #a4b8fc;
+  --color-navy-400: #7f93f8;
+  --color-navy-500: #5b6bf1;
+  --color-navy-600: #4549e5;
+  --color-navy-700: #3839ca;
+  --color-navy-800: #2f31a3;
+  --color-navy-900: #1e2050;
+
+  --font-sans: "Inter", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out;
+}
+
+@keyframes slide-in {
+  from { opacity: 0; transform: translateX(-16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.3s ease-out;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.animate-pulse-dot {
+  animation: pulse-dot 1.5s ease-in-out infinite;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
