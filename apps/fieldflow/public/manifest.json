@@ -1,21 +1,32 @@
 {
-  "name": "FieldFlow",
+  "name": "FieldFlow — Field Service Management",
   "short_name": "FieldFlow",
-  "description": "Field service management for small businesses",
+  "description": "A simple, affordable mobile-first app for field service management for small businesses and solo contractors.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#f8fafc",
   "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "categories": ["business", "productivity"],
   "icons": [
     {
       "src": "/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
