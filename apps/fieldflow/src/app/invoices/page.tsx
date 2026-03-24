@@ -1,14 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { Plus, FileText } from "lucide-react";
+import { Plus, FileText, Download } from "lucide-react";
 import { useStore } from "@/store/useStore";
 import { StatusBadge } from "@/components/StatusBadge";
 import { EmptyState } from "@/components/EmptyState";
 import { formatCurrency, formatDate } from "@/lib/utils";
+import { exportInvoicesCSV } from "@/lib/export";
 
 /**
- * @description 发票列表页
+ * @description 发票列表页（含免费CSV导出）
  */
 export default function InvoicesPage() {
   const invoices = useStore((s) => s.invoices);
@@ -23,13 +24,24 @@ export default function InvoicesPage() {
     <div className="px-4 pt-6">
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-2xl font-bold">Invoices</h1>
-        <Link
-          href="/invoices/new"
-          className="flex items-center gap-1.5 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-primary-dark"
-        >
-          <Plus size={16} />
-          New Invoice
-        </Link>
+        <div className="flex items-center gap-2">
+          {invoices.length > 0 && (
+            <button
+              onClick={() => exportInvoicesCSV(invoices, settings)}
+              className="flex h-9 w-9 items-center justify-center rounded-xl bg-surface shadow-sm transition-colors hover:bg-gray-50 dark:bg-surface-dark dark:hover:bg-gray-800"
+              title="Export CSV"
+            >
+              <Download size={16} className="text-text-muted" />
+            </button>
+          )}
+          <Link
+            href="/invoices/new"
+            className="flex items-center gap-1.5 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-primary-dark"
+          >
+            <Plus size={16} />
+            New Invoice
+          </Link>
+        </div>
       </div>
 
       {sortedInvoices.length === 0 ? (
