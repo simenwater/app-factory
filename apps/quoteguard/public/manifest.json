@@ -1,0 +1,10 @@
+{
+  "name": "QuoteGuard",
+  "short_name": "QuoteGuard",
+  "description": "自由职业者报价与边界管理工具",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#2563eb",
+  "icons": []
+}
