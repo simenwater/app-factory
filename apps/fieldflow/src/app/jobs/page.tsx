@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { Plus, Briefcase, MapPin } from "lucide-react";
+import { Plus, Briefcase, MapPin, Download } from "lucide-react";
 import { useStore } from "@/store/useStore";
 import { StatusBadge } from "@/components/StatusBadge";
 import { EmptyState } from "@/components/EmptyState";
 import { formatCurrency, formatDate } from "@/lib/utils";
+import { exportJobsCSV } from "@/lib/export";
 import { useState } from "react";
 import type { JobStatus } from "@/types";
 
@@ -17,7 +18,7 @@ const FILTER_TABS: { label: string; value: JobStatus | "all" }[] = [
 ];
 
 /**
- * @description 工作列表页
+ * @description 工作列表页（含免费CSV导出）
  */
 export default function JobsPage() {
   const jobs = useStore((s) => s.jobs);
@@ -34,13 +35,24 @@ export default function JobsPage() {
     <div className="px-4 pt-6">
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-2xl font-bold">Jobs</h1>
-        <Link
-          href="/jobs/new"
-          className="flex items-center gap-1.5 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-primary-dark"
-        >
-          <Plus size={16} />
-          New Job
-        </Link>
+        <div className="flex items-center gap-2">
+          {jobs.length > 0 && (
+            <button
+              onClick={() => exportJobsCSV(jobs, settings)}
+              className="flex h-9 w-9 items-center justify-center rounded-xl bg-surface shadow-sm transition-colors hover:bg-gray-50 dark:bg-surface-dark dark:hover:bg-gray-800"
+              title="Export CSV"
+            >
+              <Download size={16} className="text-text-muted" />
+            </button>
+          )}
+          <Link
+            href="/jobs/new"
+            className="flex items-center gap-1.5 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-primary-dark"
+          >
+            <Plus size={16} />
+            New Job
+          </Link>
+        </div>
       </div>
 
       {/* Filter Tabs */}

@@ -9,13 +9,18 @@ import {
   Plus,
   TrendingUp,
   Clock,
+  Zap,
+  Shield,
+  Download,
+  CheckCircle2,
+  X,
 } from "lucide-react";
 import { useStore } from "@/store/useStore";
 import { formatCurrency, isToday } from "@/lib/utils";
 import { StatusBadge } from "@/components/StatusBadge";
 
 /**
- * @description 首页仪表盘
+ * @description 首页仪表盘，含竞品差异化卖点区域
  */
 export default function HomePage() {
   const jobs = useStore((s) => s.jobs);
@@ -32,6 +37,8 @@ export default function HomePage() {
   const totalRevenue = invoices
     .filter((inv) => inv.paymentStatus === "paid")
     .reduce((sum, inv) => sum + inv.paidAmount, 0);
+
+  const isNewUser = jobs.length === 0 && invoices.length === 0;
 
   const stats = [
     {
@@ -64,6 +71,15 @@ export default function HomePage() {
     },
   ];
 
+  const competitorComparison = [
+    { feature: "Sign-up required", us: false, them: true },
+    { feature: "Free data export (CSV)", us: true, them: false },
+    { feature: "Free PDF invoices", us: true, them: false },
+    { feature: "Transparent pricing", us: true, them: false },
+    { feature: "Works offline (PWA)", us: true, them: false },
+    { feature: "Starting price", usLabel: "$0/mo", themLabel: "$39–89/mo" },
+  ];
+
   return (
     <div className="px-4 pt-6">
       <div className="mb-6 flex items-center justify-between">
@@ -84,6 +100,41 @@ export default function HomePage() {
           <Plus size={20} />
         </Link>
       </div>
+
+      {/* Hero Tagline — visible to all, especially impactful for new users */}
+      {isNewUser && (
+        <div className="mb-6 overflow-hidden rounded-2xl bg-gradient-to-br from-primary to-blue-700 p-5 text-white shadow-lg">
+          <h2 className="mb-1 text-lg font-extrabold leading-tight">
+            Zero signup. Zero hidden fees.
+            <br />
+            Manage field work in seconds, not hours.
+          </h2>
+          <p className="mb-4 text-sm text-blue-100">
+            Unlike Jobber ($39–449/mo) or Housecall Pro ($79–468/mo), FieldFlow
+            is free to start — no credit card, no sales calls, no lock-in.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <div className="flex items-center gap-1.5 text-xs font-medium">
+              <Shield size={14} />
+              <span>No registration</span>
+            </div>
+            <div className="flex items-center gap-1.5 text-xs font-medium">
+              <Download size={14} />
+              <span>Free CSV & PDF export</span>
+            </div>
+            <div className="flex items-center gap-1.5 text-xs font-medium">
+              <Zap size={14} />
+              <span>3-step job creation</span>
+            </div>
+          </div>
+          <Link
+            href="/jobs/new?quick=1"
+            className="mt-4 inline-block rounded-xl bg-white px-5 py-2.5 text-sm font-bold text-primary shadow-sm transition-transform hover:scale-105"
+          >
+            Create Your First Job — Free
+          </Link>
+        </div>
+      )}
 
       {/* Stats Grid */}
       <div className="mb-8 grid grid-cols-2 gap-3">
@@ -110,30 +161,39 @@ export default function HomePage() {
         <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-text-muted dark:text-text-muted-dark">
           Quick Actions
         </h2>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-3 gap-3">
+          <Link
+            href="/jobs/new?quick=1"
+            className="flex flex-col items-center gap-2 rounded-xl bg-gradient-to-br from-primary/10 to-blue-50 p-4 shadow-sm transition-shadow hover:shadow-md dark:from-primary/20 dark:to-blue-900/10"
+          >
+            <div className="rounded-lg bg-primary/10 p-2">
+              <Zap size={18} className="text-primary" />
+            </div>
+            <span className="text-xs font-semibold text-primary">Quick Job</span>
+          </Link>
           <Link
             href="/jobs/new"
-            className="flex items-center gap-3 rounded-xl bg-surface p-4 shadow-sm transition-shadow hover:shadow-md dark:bg-surface-dark"
+            className="flex flex-col items-center gap-2 rounded-xl bg-surface p-4 shadow-sm transition-shadow hover:shadow-md dark:bg-surface-dark"
           >
             <div className="rounded-lg bg-primary/10 p-2">
               <Briefcase size={18} className="text-primary" />
             </div>
-            <span className="text-sm font-medium">New Job</span>
+            <span className="text-xs font-medium">New Job</span>
           </Link>
           <Link
             href="/invoices/new"
-            className="flex items-center gap-3 rounded-xl bg-surface p-4 shadow-sm transition-shadow hover:shadow-md dark:bg-surface-dark"
+            className="flex flex-col items-center gap-2 rounded-xl bg-surface p-4 shadow-sm transition-shadow hover:shadow-md dark:bg-surface-dark"
           >
             <div className="rounded-lg bg-green-500/10 p-2">
               <DollarSign size={18} className="text-green-500" />
             </div>
-            <span className="text-sm font-medium">New Invoice</span>
+            <span className="text-xs font-medium">Invoice</span>
           </Link>
         </div>
       </div>
 
       {/* Upcoming Jobs */}
-      <div>
+      <div className="mb-8">
         <div className="mb-3 flex items-center justify-between">
           <h2 className="text-sm font-semibold uppercase tracking-wider text-text-muted dark:text-text-muted-dark">
             Upcoming Jobs
@@ -175,6 +235,55 @@ export default function HomePage() {
             ))}
           </div>
         )}
+      </div>
+
+      {/* Why FieldFlow — Competitor Comparison (always visible) */}
+      <div className="mb-8">
+        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-text-muted dark:text-text-muted-dark">
+          Why FieldFlow
+        </h2>
+        <div className="overflow-hidden rounded-2xl bg-surface shadow-sm dark:bg-surface-dark">
+          <div className="grid grid-cols-3 border-b border-border bg-gray-50 px-4 py-2.5 text-xs font-semibold dark:border-border-dark dark:bg-surface-dark">
+            <span className="text-text-muted dark:text-text-muted-dark">Feature</span>
+            <span className="text-center text-primary">FieldFlow</span>
+            <span className="text-center text-text-muted dark:text-text-muted-dark">Others</span>
+          </div>
+          {competitorComparison.map((row) => (
+            <div
+              key={row.feature}
+              className="grid grid-cols-3 border-b border-border/50 px-4 py-2.5 text-xs last:border-b-0 dark:border-border-dark/50"
+            >
+              <span className="text-text dark:text-text-dark">{row.feature}</span>
+              {"usLabel" in row ? (
+                <>
+                  <span className="text-center font-bold text-green-600 dark:text-green-400">
+                    {row.usLabel}
+                  </span>
+                  <span className="text-center font-medium text-red-500 dark:text-red-400">
+                    {row.themLabel}
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span className="flex justify-center">
+                    {row.us ? (
+                      <CheckCircle2 size={16} className="text-green-500" />
+                    ) : (
+                      <X size={16} className="text-red-400" />
+                    )}
+                  </span>
+                  <span className="flex justify-center">
+                    {row.them ? (
+                      <CheckCircle2 size={16} className="text-green-500" />
+                    ) : (
+                      <X size={16} className="text-red-400" />
+                    )}
+                  </span>
+                </>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
