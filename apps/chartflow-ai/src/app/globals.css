@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@theme {
+  --font-family-sans: system-ui, -apple-system, sans-serif;
+  --font-family-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family-sans);
+}
+
+.chart-container svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.code-editor {
+  font-family: var(--font-family-mono);
+  font-size: 14px;
+  line-height: 1.6;
+  tab-size: 2;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes pulse-border {
+  0%, 100% { border-color: rgba(99, 102, 241, 0.3); }
+  50% { border-color: rgba(99, 102, 241, 0.8); }
+}
+
+.generating-border {
+  animation: pulse-border 1.5s ease-in-out infinite;
+}
