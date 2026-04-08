@@ -1,0 +1,9 @@
+{
+  "name": "AgentConfig Pro",
+  "short_name": "AgentConfig",
+  "description": "AI 编码助手配置文件生成器",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f0f1a",
+  "theme_color": "#6366f1"
+}
