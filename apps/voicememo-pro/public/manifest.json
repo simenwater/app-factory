@@ -1,0 +1,10 @@
+{
+  "name": "VoiceMemo Pro",
+  "short_name": "VoiceMemo",
+  "description": "AI 语音转专业内容工具",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#7c3aed",
+  "icons": []
+}
