@@ -1,0 +1,527 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A10001 /* PedalLinkProApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10001; };
+		A10002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10002; };
+		A10003 /* MIDIMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10003; };
+		A10004 /* MIDIMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10004; };
+		A10005 /* HostAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10005; };
+		A10006 /* MIDIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10006; };
+		A10007 /* MappingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10007; };
+		A10008 /* HostInteropService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10008; };
+		A10009 /* StoreKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10009; };
+		A10010 /* MIDIMonitorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10010; };
+		A10011 /* MappingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10011; };
+		A10012 /* MappingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10012; };
+		A10013 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10013; };
+		A10014 /* MIDIActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10014; };
+		A10015 /* PedalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10015; };
+		A10016 /* ActionPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10016; };
+		A10017 /* MIDIMonitorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10017; };
+		A10018 /* MappingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10018; };
+		A10019 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10019; };
+		A10020 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10020; };
+		A10030 /* MIDIMessageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10030; };
+		A10031 /* MappingEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10031; };
+		A10032 /* HostInteropServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10032; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C10001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D10001;
+			proxyType = 1;
+			remoteGlobalIDString = E10001;
+			remoteInfo = PedalLinkPro;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		B10001 /* PedalLinkProApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedalLinkProApp.swift; sourceTree = "<group>"; };
+		B10002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B10003 /* MIDIMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDIMessage.swift; sourceTree = "<group>"; };
+		B10004 /* MIDIMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDIMapping.swift; sourceTree = "<group>"; };
+		B10005 /* HostAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostAction.swift; sourceTree = "<group>"; };
+		B10006 /* MIDIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDIService.swift; sourceTree = "<group>"; };
+		B10007 /* MappingEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingEngine.swift; sourceTree = "<group>"; };
+		B10008 /* HostInteropService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostInteropService.swift; sourceTree = "<group>"; };
+		B10009 /* StoreKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitService.swift; sourceTree = "<group>"; };
+		B10010 /* MIDIMonitorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDIMonitorView.swift; sourceTree = "<group>"; };
+		B10011 /* MappingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingListView.swift; sourceTree = "<group>"; };
+		B10012 /* MappingDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingDetailView.swift; sourceTree = "<group>"; };
+		B10013 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B10014 /* MIDIActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDIActivityIndicator.swift; sourceTree = "<group>"; };
+		B10015 /* PedalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedalButton.swift; sourceTree = "<group>"; };
+		B10016 /* ActionPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionPickerView.swift; sourceTree = "<group>"; };
+		B10017 /* MIDIMonitorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDIMonitorViewModel.swift; sourceTree = "<group>"; };
+		B10018 /* MappingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingListViewModel.swift; sourceTree = "<group>"; };
+		B10019 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B10020 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B10021 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B10030 /* MIDIMessageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIDIMessageTests.swift; sourceTree = "<group>"; };
+		B10031 /* MappingEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MappingEngineTests.swift; sourceTree = "<group>"; };
+		B10032 /* HostInteropServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostInteropServiceTests.swift; sourceTree = "<group>"; };
+		F10001 /* PedalLinkPro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PedalLinkPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F10002 /* PedalLinkProTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PedalLinkProTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		G10001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		G10002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		H10001 = {
+			isa = PBXGroup;
+			children = (
+				H10002 /* PedalLinkPro */,
+				H10010 /* PedalLinkProTests */,
+				H10020 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		H10002 /* PedalLinkPro */ = {
+			isa = PBXGroup;
+			children = (
+				H10003 /* App */,
+				H10004 /* Models */,
+				H10005 /* Services */,
+				H10006 /* ViewModels */,
+				H10007 /* Views */,
+				H10008 /* Utilities */,
+				H10009 /* Resources */,
+			);
+			path = PedalLinkPro;
+			sourceTree = "<group>";
+		};
+		H10003 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				B10001 /* PedalLinkProApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		H10004 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B10003 /* MIDIMessage.swift */,
+				B10004 /* MIDIMapping.swift */,
+				B10005 /* HostAction.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		H10005 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B10006 /* MIDIService.swift */,
+				B10007 /* MappingEngine.swift */,
+				B10008 /* HostInteropService.swift */,
+				B10009 /* StoreKitService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		H10006 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B10017 /* MIDIMonitorViewModel.swift */,
+				B10018 /* MappingListViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		H10007 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B10002 /* ContentView.swift */,
+				B10010 /* MIDIMonitorView.swift */,
+				B10011 /* MappingListView.swift */,
+				B10012 /* MappingDetailView.swift */,
+				B10013 /* SettingsView.swift */,
+				H10007A /* Components */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		H10007A /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				B10014 /* MIDIActivityIndicator.swift */,
+				B10015 /* PedalButton.swift */,
+				B10016 /* ActionPickerView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		H10008 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				B10019 /* Constants.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		H10009 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B10020 /* Assets.xcassets */,
+				B10021 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		H10010 /* PedalLinkProTests */ = {
+			isa = PBXGroup;
+			children = (
+				B10030 /* MIDIMessageTests.swift */,
+				B10031 /* MappingEngineTests.swift */,
+				B10032 /* HostInteropServiceTests.swift */,
+			);
+			path = PedalLinkProTests;
+			sourceTree = "<group>";
+		};
+		H10020 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F10001 /* PedalLinkPro.app */,
+				F10002 /* PedalLinkProTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E10001 /* PedalLinkPro */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = J10001;
+			buildPhases = (
+				K10001 /* Sources */,
+				G10001 /* Frameworks */,
+				L10001 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PedalLinkPro;
+			productName = PedalLinkPro;
+			productReference = F10001 /* PedalLinkPro.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E10002 /* PedalLinkProTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = J10002;
+			buildPhases = (
+				K10002 /* Sources */,
+				G10002 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C10001 /* PBXContainerItemProxy */,
+			);
+			name = PedalLinkProTests;
+			productName = PedalLinkProTests;
+			productReference = F10002 /* PedalLinkProTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D10001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					E10001 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					E10002 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = E10001;
+					};
+				};
+			};
+			buildConfigurationList = J10003;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = "zh-Hans";
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				"zh-Hans",
+			);
+			mainGroup = H10001;
+			productRefGroup = H10020 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E10001 /* PedalLinkPro */,
+				E10002 /* PedalLinkProTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		L10001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10020 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		K10001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10001 /* PedalLinkProApp.swift in Sources */,
+				A10002 /* ContentView.swift in Sources */,
+				A10003 /* MIDIMessage.swift in Sources */,
+				A10004 /* MIDIMapping.swift in Sources */,
+				A10005 /* HostAction.swift in Sources */,
+				A10006 /* MIDIService.swift in Sources */,
+				A10007 /* MappingEngine.swift in Sources */,
+				A10008 /* HostInteropService.swift in Sources */,
+				A10009 /* StoreKitService.swift in Sources */,
+				A10010 /* MIDIMonitorView.swift in Sources */,
+				A10011 /* MappingListView.swift in Sources */,
+				A10012 /* MappingDetailView.swift in Sources */,
+				A10013 /* SettingsView.swift in Sources */,
+				A10014 /* MIDIActivityIndicator.swift in Sources */,
+				A10015 /* PedalButton.swift in Sources */,
+				A10016 /* ActionPickerView.swift in Sources */,
+				A10017 /* MIDIMonitorViewModel.swift in Sources */,
+				A10018 /* MappingListViewModel.swift in Sources */,
+				A10019 /* Constants.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		K10002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10030 /* MIDIMessageTests.swift in Sources */,
+				A10031 /* MappingEngineTests.swift in Sources */,
+				A10032 /* HostInteropServiceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C10001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E10001 /* PedalLinkPro */;
+			targetProxy = C10001 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		M10001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		M10002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		M10003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = PedalLinkPro/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "PedalLink Pro";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pedallinkpro.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		M10004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = PedalLinkPro/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "PedalLink Pro";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pedallinkpro.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		M10005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pedallinkpro.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PedalLinkPro.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PedalLinkPro";
+			};
+			name = Debug;
+		};
+		M10006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pedallinkpro.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PedalLinkPro.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/PedalLinkPro";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		J10001 /* Build configuration list for PBXNativeTarget "PedalLinkPro" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				M10003 /* Debug */,
+				M10004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		J10002 /* Build configuration list for PBXNativeTarget "PedalLinkProTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				M10005 /* Debug */,
+				M10006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		J10003 /* Build configuration list for PBXProject "PedalLinkPro" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				M10001 /* Debug */,
+				M10002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = D10001 /* Project object */;
+}
