@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+:root {
+  --color-background: #f8fafc;
+  --color-foreground: #0f172a;
+}
+
+.dark {
+  --color-background: #0f172a;
+  --color-foreground: #f1f5f9;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+@media print {
+  header,
+  button {
+    display: none !important;
+  }
+}
