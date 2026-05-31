@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-primary: #0a0a0f;
+  --color-bg-secondary: #12121a;
+  --color-bg-tertiary: #1a1a2e;
+  --color-bg-card: #16162a;
+  --color-border: #2a2a4a;
+  --color-border-hover: #3a3a5a;
+  --color-text-primary: #e4e4f0;
+  --color-text-secondary: #9999bb;
+  --color-text-muted: #6666aa;
+  --color-accent: #6366f1;
+  --color-accent-hover: #818cf8;
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+
+  --color-provider-openai: #10a37f;
+  --color-provider-anthropic: #d97706;
+  --color-provider-google: #4285f4;
+  --color-provider-custom: #8b5cf6;
+
+  --color-light-bg-primary: #f8f9fc;
+  --color-light-bg-secondary: #ffffff;
+  --color-light-bg-tertiary: #f0f1f5;
+  --color-light-bg-card: #ffffff;
+  --color-light-border: #e2e4ea;
+  --color-light-border-hover: #c8cad2;
+  --color-light-text-primary: #1a1a2e;
+  --color-light-text-secondary: #5a5a7a;
+  --color-light-text-muted: #9999aa;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Dark mode (default) */
+.dark {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+}
+
+/* Light mode */
+.light {
+  background-color: var(--color-light-bg-primary);
+  color: var(--color-light-text-primary);
+}
+
+/* Scrollbar styling */
+.dark ::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.dark ::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: var(--color-border-hover);
+}
+
+/* JSON 高亮 */
+.json-key { color: #818cf8; }
+.json-string { color: #22c55e; }
+.json-number { color: #f59e0b; }
+.json-boolean { color: #ef4444; }
+.json-null { color: #6b7280; }
+
+/* 动画 */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(99, 102, 241, 0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+/* 表格 hover */
+.log-row {
+  transition: background-color 0.15s ease;
+}
