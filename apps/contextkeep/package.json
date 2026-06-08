@@ -1,0 +1,195 @@
+{
+  "name": "contextkeep",
+  "displayName": "ContextKeep",
+  "description": "AI 编码助手的持久化记忆层 — 防止上下文腐烂，跨会话保留项目上下文",
+  "version": "0.1.0",
+  "publisher": "contextkeep",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Machine Learning",
+    "Programming Languages"
+  ],
+  "keywords": [
+    "ai",
+    "context",
+    "memory",
+    "claude",
+    "copilot",
+    "codex",
+    "vector",
+    "rag"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "icon": "media/icon.png",
+  "contributes": {
+    "commands": [
+      {
+        "command": "contextkeep.indexProject",
+        "title": "ContextKeep: 索引当前项目",
+        "icon": "$(database)"
+      },
+      {
+        "command": "contextkeep.searchMemory",
+        "title": "ContextKeep: 搜索记忆",
+        "icon": "$(search)"
+      },
+      {
+        "command": "contextkeep.injectContext",
+        "title": "ContextKeep: 注入上下文到剪贴板",
+        "icon": "$(clippy)"
+      },
+      {
+        "command": "contextkeep.clearMemory",
+        "title": "ContextKeep: 清除项目记忆"
+      },
+      {
+        "command": "contextkeep.showStats",
+        "title": "ContextKeep: 显示记忆统计"
+      },
+      {
+        "command": "contextkeep.addNote",
+        "title": "ContextKeep: 添加上下文笔记",
+        "icon": "$(note)"
+      },
+      {
+        "command": "contextkeep.manageSubscription",
+        "title": "ContextKeep: 管理订阅"
+      },
+      {
+        "command": "contextkeep.refreshSidebar",
+        "title": "刷新",
+        "icon": "$(refresh)"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "contextkeep-sidebar",
+          "title": "ContextKeep",
+          "icon": "$(brain)"
+        }
+      ]
+    },
+    "views": {
+      "contextkeep-sidebar": [
+        {
+          "type": "webview",
+          "id": "contextkeep.sidebarView",
+          "name": "ContextKeep",
+          "icon": "$(brain)"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "ContextKeep",
+      "properties": {
+        "contextkeep.autoIndex": {
+          "type": "boolean",
+          "default": true,
+          "description": "自动索引项目文件变更"
+        },
+        "contextkeep.maxFileSize": {
+          "type": "number",
+          "default": 102400,
+          "description": "最大索引文件大小（字节）"
+        },
+        "contextkeep.excludePatterns": {
+          "type": "array",
+          "default": [
+            "**/node_modules/**",
+            "**/.git/**",
+            "**/dist/**",
+            "**/build/**",
+            "**/.next/**",
+            "**/coverage/**",
+            "**/__pycache__/**",
+            "**/.venv/**",
+            "**/vendor/**",
+            "**/*.min.js",
+            "**/*.map",
+            "**/package-lock.json",
+            "**/yarn.lock",
+            "**/pnpm-lock.yaml"
+          ],
+          "description": "排除的文件模式"
+        },
+        "contextkeep.indexLanguages": {
+          "type": "array",
+          "default": [
+            "typescript",
+            "javascript",
+            "python",
+            "go",
+            "rust",
+            "java",
+            "c",
+            "cpp",
+            "csharp",
+            "ruby",
+            "php",
+            "swift",
+            "kotlin",
+            "markdown",
+            "json",
+            "yaml",
+            "toml"
+          ],
+          "description": "索引的编程语言"
+        },
+        "contextkeep.maxMemoryItems": {
+          "type": "number",
+          "default": 5000,
+          "description": "最大记忆条目数（免费版限制）"
+        },
+        "contextkeep.topKResults": {
+          "type": "number",
+          "default": 10,
+          "description": "检索时返回的最大结果数"
+        }
+      }
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "contextkeep.refreshSidebar",
+          "when": "view == contextkeep.sidebarView",
+          "group": "navigation"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "contextkeep.addNote",
+          "group": "contextkeep@1",
+          "when": "editorHasSelection"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts",
+    "test": "jest --config jest.config.ts",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.56.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
