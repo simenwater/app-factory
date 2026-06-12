@@ -1,0 +1,10 @@
+{
+  "name": "VoiceStruct",
+  "short_name": "VoiceStruct",
+  "description": "AI-powered voice note tool that converts spoken recordings into structured text",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#8b5cf6",
+  "icons": []
+}
