@@ -1,0 +1,35 @@
+{
+  "identifier" : "com.ringtoneflow.storekit",
+  "nonRenewingSubscriptions" : [],
+  "products" : [
+    {
+      "displayPrice" : "4.99",
+      "familyShareable" : false,
+      "internalID" : "ringtoneflow_pro_001",
+      "localizations" : [
+        {
+          "description" : "Unlock unlimited ringtone creation. One-time purchase, no subscription.",
+          "displayName" : "RingtoneFlow Pro",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "解锁无限铃声制作。一次购买，无需订阅。",
+          "displayName" : "RingtoneFlow Pro",
+          "locale" : "zh_CN"
+        }
+      ],
+      "productID" : "com.ringtoneflow.pro.unlock",
+      "referenceName" : "Pro Unlock",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+    "_applicationInternalID" : "ringtoneflow_app",
+    "_developerTeamID" : ""
+  },
+  "subscriptionGroups" : [],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}

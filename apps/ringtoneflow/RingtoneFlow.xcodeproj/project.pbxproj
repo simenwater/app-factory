@@ -1,0 +1,498 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A10001 /* RingtoneFlowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10001; };
+		A10002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10002; };
+		A10003 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10003; };
+		A10004 /* EditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10004; };
+		A10005 /* WaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10005; };
+		A10006 /* ExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10006; };
+		A10007 /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10007; };
+		A10008 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10008; };
+		A10009 /* RingtoneProject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10009; };
+		A10010 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10010; };
+		A10011 /* AudioEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10011; };
+		A10012 /* StoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10012; };
+		A10013 /* AudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10013; };
+		A10014 /* FileExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10014; };
+		A10015 /* StoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10015; };
+		A10016 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10016; };
+		A10017 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10017; };
+		A10018 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10018; };
+		A20001 /* RingtoneProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10001; };
+		A20002 /* AppStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10002; };
+		A20003 /* ConstantsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10003; };
+		A20004 /* TimeIntervalExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10004; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D10001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E10001;
+			proxyType = 1;
+			remoteGlobalIDString = F10001;
+			remoteInfo = RingtoneFlow;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		B10001 /* RingtoneFlowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingtoneFlowApp.swift; sourceTree = "<group>"; };
+		B10002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B10003 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		B10004 /* EditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorView.swift; sourceTree = "<group>"; };
+		B10005 /* WaveformView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformView.swift; sourceTree = "<group>"; };
+		B10006 /* ExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportView.swift; sourceTree = "<group>"; };
+		B10007 /* PaywallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallView.swift; sourceTree = "<group>"; };
+		B10008 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B10009 /* RingtoneProject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingtoneProject.swift; sourceTree = "<group>"; };
+		B10010 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		B10011 /* AudioEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEditorViewModel.swift; sourceTree = "<group>"; };
+		B10012 /* StoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewModel.swift; sourceTree = "<group>"; };
+		B10013 /* AudioService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioService.swift; sourceTree = "<group>"; };
+		B10014 /* FileExportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileExportService.swift; sourceTree = "<group>"; };
+		B10015 /* StoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreService.swift; sourceTree = "<group>"; };
+		B10016 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B10017 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		B10018 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B10019 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B10020 /* RingtoneFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RingtoneFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B10021 /* RingtoneFlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RingtoneFlowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C10001 /* RingtoneProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingtoneProjectTests.swift; sourceTree = "<group>"; };
+		C10002 /* AppStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateTests.swift; sourceTree = "<group>"; };
+		C10003 /* ConstantsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantsTests.swift; sourceTree = "<group>"; };
+		C10004 /* TimeIntervalExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExtensionTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F20001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F20002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		G10001 = {
+			isa = PBXGroup;
+			children = (
+				G10002 /* RingtoneFlow */,
+				G10008 /* RingtoneFlowTests */,
+				G10009 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		G10002 /* RingtoneFlow */ = {
+			isa = PBXGroup;
+			children = (
+				B10001 /* RingtoneFlowApp.swift */,
+				B10019 /* Info.plist */,
+				B10018 /* Assets.xcassets */,
+				G10003 /* Models */,
+				G10004 /* Views */,
+				G10005 /* ViewModels */,
+				G10006 /* Services */,
+				G10007 /* Utilities */,
+			);
+			path = RingtoneFlow;
+			sourceTree = "<group>";
+		};
+		G10003 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B10009 /* RingtoneProject.swift */,
+				B10010 /* AppState.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		G10004 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B10002 /* ContentView.swift */,
+				B10003 /* HomeView.swift */,
+				B10004 /* EditorView.swift */,
+				B10005 /* WaveformView.swift */,
+				B10006 /* ExportView.swift */,
+				B10007 /* PaywallView.swift */,
+				B10008 /* SettingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		G10005 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				B10011 /* AudioEditorViewModel.swift */,
+				B10012 /* StoreViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		G10006 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B10013 /* AudioService.swift */,
+				B10014 /* FileExportService.swift */,
+				B10015 /* StoreService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		G10007 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				B10016 /* Constants.swift */,
+				B10017 /* Extensions.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		G10008 /* RingtoneFlowTests */ = {
+			isa = PBXGroup;
+			children = (
+				C10001 /* RingtoneProjectTests.swift */,
+				C10002 /* AppStateTests.swift */,
+				C10003 /* ConstantsTests.swift */,
+				C10004 /* TimeIntervalExtensionTests.swift */,
+			);
+			path = RingtoneFlowTests;
+			sourceTree = "<group>";
+		};
+		G10009 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B10020 /* RingtoneFlow.app */,
+				B10021 /* RingtoneFlowTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F10001 /* RingtoneFlow */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = H10001;
+			buildPhases = (
+				F30001 /* Sources */,
+				F20001 /* Frameworks */,
+				F40001 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RingtoneFlow;
+			productName = RingtoneFlow;
+			productReference = B10020;
+			productType = "com.apple.product-type.application";
+		};
+		F10002 /* RingtoneFlowTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = H10002;
+			buildPhases = (
+				F30002 /* Sources */,
+				F20002 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D10001 /* PBXContainerItemProxy */,
+			);
+			name = RingtoneFlowTests;
+			productName = RingtoneFlowTests;
+			productReference = B10021;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E10001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					F10001 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					F10002 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = F10001;
+					};
+				};
+			};
+			buildConfigurationList = H10003;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				"zh-Hans",
+			);
+			mainGroup = G10001;
+			productRefGroup = G10009;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F10001 /* RingtoneFlow */,
+				F10002 /* RingtoneFlowTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F40001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10018 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F30001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A10001 /* RingtoneFlowApp.swift in Sources */,
+				A10002 /* ContentView.swift in Sources */,
+				A10003 /* HomeView.swift in Sources */,
+				A10004 /* EditorView.swift in Sources */,
+				A10005 /* WaveformView.swift in Sources */,
+				A10006 /* ExportView.swift in Sources */,
+				A10007 /* PaywallView.swift in Sources */,
+				A10008 /* SettingsView.swift in Sources */,
+				A10009 /* RingtoneProject.swift in Sources */,
+				A10010 /* AppState.swift in Sources */,
+				A10011 /* AudioEditorViewModel.swift in Sources */,
+				A10012 /* StoreViewModel.swift in Sources */,
+				A10013 /* AudioService.swift in Sources */,
+				A10014 /* FileExportService.swift in Sources */,
+				A10015 /* StoreService.swift in Sources */,
+				A10016 /* Constants.swift in Sources */,
+				A10017 /* Extensions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F30002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A20001 /* RingtoneProjectTests.swift in Sources */,
+				A20002 /* AppStateTests.swift in Sources */,
+				A20003 /* ConstantsTests.swift in Sources */,
+				A20004 /* TimeIntervalExtensionTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D20001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F10001;
+			targetProxy = D10001;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		I10001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		I10002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_OPTIMIZATION_LEVEL = s;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		I10003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RingtoneFlow/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = RingtoneFlow;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ringtoneflow.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		I10004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RingtoneFlow/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = RingtoneFlow;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ringtoneflow.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		I10005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ringtoneflow.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RingtoneFlow.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/RingtoneFlow";
+			};
+			name = Debug;
+		};
+		I10006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ringtoneflow.app.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RingtoneFlow.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/RingtoneFlow";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		H10001 /* Build configuration list for PBXNativeTarget "RingtoneFlow" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				I10003 /* Debug */,
+				I10004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		H10002 /* Build configuration list for PBXNativeTarget "RingtoneFlowTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				I10005 /* Debug */,
+				I10006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		H10003 /* Build configuration list for PBXProject "RingtoneFlow" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				I10001 /* Debug */,
+				I10002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E10001 /* Project object */;
+}
