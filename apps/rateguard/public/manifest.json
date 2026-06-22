@@ -1,0 +1,10 @@
+{
+  "name": "RateGuard",
+  "short_name": "RateGuard",
+  "description": "AI 助手 — 自动筛选不合理请求，生成专业报价",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#7c3aed",
+  "icons": []
+}
