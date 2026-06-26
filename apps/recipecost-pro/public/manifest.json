@@ -1,0 +1,10 @@
+{
+  "name": "RecipeCost Pro",
+  "short_name": "RecipeCost",
+  "description": "面向小餐饮业主的简易食谱成本计算与定价工具",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#059669",
+  "icons": []
+}
